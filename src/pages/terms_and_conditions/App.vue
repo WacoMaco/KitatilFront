@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <Navbar/>
-    <h1 class = 'heading-principal'>Welcome to Datame</h1>
+    <h1 class = 'heading-principal'>Welcome to Kitatil</h1>
     <p class="disclaimer">{{$t('terms_explanation')}}</p>
     <div class="paragraph">
-    <p>These terms and conditions outline the rules and regulations for the use of Datame's Website.
-By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Datame's website if you do not accept all of the terms and conditions stated
+    <p>These terms and conditions outline the rules and regulations for the use of Kitatil's Website.
+By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Kitatil's website if you do not accept all of the terms and conditions stated
 on this page.
 The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and any or all Agreements: 'Client', 'You' and 'Your' refers to you, the person accessing this website and accepting the Company’s terms and conditions. 'The Company', 'Ourselves', 'We', 'Our' and 'Us', refers to our Company. 'Party', 'Parties', or 'Us', refers to both the Client and ourselves, or either the Client or ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner, whether by formal meetings of a fixed duration, or any other means, for the express purpose of meeting the Client's needs in respect of provision of the Company's stated services/products, in accordance with and subject to, prevailing law of . Any use of the above terminology or other words in the singular, plural, capitalisation and/or he/she or they, are taken as interchangeable and therefore as referring to same.
     </p>
     </div>
     <h1 class = 'heading'>License</h1>
     <div class="paragraph">
-    <p>Unless otherwise stated, Datame and/or it's licensors own the intellectual property rights for all material on Datame. All intellectual property rights are reserved. You may view and/or print pages from https://front5-datame.herokuapp.com for your own personal use subject to restrictions set in
+    <p>Unless otherwise stated, Kitatil and/or it's licensors own the intellectual property rights for all material on Kitatil. All intellectual property rights are reserved. You may view and/or print pages from https://front5-datame.herokuapp.com for your own personal use subject to restrictions set in
 these terms and conditions.
 You must not:</p>
 <ul>
@@ -25,16 +24,16 @@ You must not:</p>
     <h1 class = 'heading'>User Comments</h1>
     <div class="paragraph">
     <p>This Agreement shall begin on the date hereof.
-Certain parts of this website offer the opportunity for users to post and exchange opinions, information, material and data ('Comments') in areas of the website. Datame does not screen, edit, publish or review Comments prior to their appearance on the website and Comments do not reflect the views or opinions of Datame, its agents or affiliates. Comments
-reflect the view and opinion of the person who posts such view or opinion. To the extent permitted by applicable laws Datame shall not be responsible or liable for the Comments or for any loss cost, liability, damages or expenses caused and or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.
-Datame reserves the right to monitor all Comments and to remove any Comments which it considers in its absolute discretion to be inappropriate, offensive or otherwise in breach of these Terms and Conditions.
+Certain parts of this website offer the opportunity for users to post and exchange opinions, information, material and data ('Comments') in areas of the website. Kitatil does not screen, edit, publish or review Comments prior to their appearance on the website and Comments do not reflect the views or opinions of Kitatil, its agents or affiliates. Comments
+reflect the view and opinion of the person who posts such view or opinion. To the extent permitted by applicable laws Kitatil shall not be responsible or liable for the Comments or for any loss cost, liability, damages or expenses caused and or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.
+Kitatil reserves the right to monitor all Comments and to remove any Comments which it considers in its absolute discretion to be inappropriate, offensive or otherwise in breach of these Terms and Conditions.
 You warrant and represent that:</p>
 <ul>
 <li>You are entitled to post the Comments on our website and have all necessary licenses and consents to do so.</li>
 <li>The Comments do not infringe any intellectual property right, including without limitation copyright, patent or trademark, or other proprietary right of any third party.</li>
 <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material or material which is an invasion of privacy.</li>
 <li>The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.</li>
-<li>You hereby grant to Datame a non-exclusive royalty-free license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</li>
+<li>You hereby grant to Kitatil a non-exclusive royalty-free license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</li>
     </ul>
     </div>
     <br/>
@@ -68,7 +67,7 @@ You warrant and represent that:</p>
 <ul>
 <li>The link would not reflect unfavorably on us or our accredited businesses (for example, trade associations or other organizations representing inherently suspect types of business, such as work-at-home opportunities, shall not be allowedto link).</li>
 <li>The organization does not have an unsatisfactory record with us.</li>
-<li>The benefit to us from the visibility associated with the hyperlink outweighs the absence of Datame.</li>
+<li>The benefit to us from the visibility associated with the hyperlink outweighs the absence of Kitatil.</li>
 <li> Where the link is in the context of general resource information or is otherwise consistent with editorial content in a newsletter or similar product furthering the mission of the organization.</li>
   </ul>
 <p>These organizations may link to our home page, to publications or to other Web site information so long as the link:</p>
@@ -88,9 +87,9 @@ Please include your name, your organization name, contact information (such as a
 <li>By use of the uniform resource locator (Web address) being linked to.</li>
 <li>By use of any other description of our Web site or material being linked to that
 makes sense within the context and format of content on the linking party's site.
-No use of Datame's logo or other artwork will be allowed for linking absent a trademark
+No use of Kitatil's logo or other artwork will be allowed for linking absent a trademark
 license agreement.</li></ul>
-    </p>
+
     </div>
     <br/>
     <h1 class = 'heading'>Iframes</h1>
@@ -140,11 +139,9 @@ To the extent that the website and the information and services on the website a
 </template>
 
 <script>
-import Navbar from '../../components/Navbar.vue'
 export default {
   name: 'app',
   components: {
-    Navbar
   }, mounted: function() {
     var lang
 

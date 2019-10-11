@@ -4,7 +4,7 @@
         <b-nav-text><p class="text">© Copyright 2019 | {{$t('made_in_sevilla')}}</p></b-nav-text>
          <b-navbar-nav class="ml-auto">
             <b-nav-item href="https://data-me.github.io/"><p class="link" >{{$t("about_us")}}</p></b-nav-item>
-            <b-nav-item href="/terms_and_conditions.html"><p class="link">{{$t('terms&conditions')}}</p></b-nav-item>
+            <router-link :to ="{name:'TermsAndConditions'}"> <p class="link">{{$t('terms&conditions')}}</p> </router-link>
             <!--<b-nav-item href="#">Privacy policy</b-nav-item>-->
         </b-navbar-nav>
 
@@ -38,6 +38,11 @@ export default {
 .text {
     color:aliceblue;
 }
-
+#footer {
+  position:sticky;
+   bottom:0;
+   width:100%;
+   height:60px;
+}
 
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <Navbar v-if="showNavbar"/>
 
     <b-form id="form" @submit.prevent @submit="onSubmit" v-if="showForm">
       <label for="textUsername">{{$t('username')}}</label>
@@ -18,19 +17,14 @@
       <b-button type="submit" variant="primary">{{$t('login')}}</b-button>
     </b-form>
 
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from "../../components/Navbar.vue";
-import Footer from "../../components/Footer.vue";
 
 export default {
   name: "app",
   components: {
-    Navbar,
-    Footer
   },
   data() {
     return {

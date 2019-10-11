@@ -2,7 +2,7 @@
   <div class="hello">
     <Navbar/>
     <br/>
-    <h1>{{msg}}</h1>
+    <h1>HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</h1>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: '',
+      msg: 'Hola mundo',
     }
   },
     mounted: function () {

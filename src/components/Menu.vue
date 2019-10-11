@@ -2,16 +2,16 @@
    
      <Push>
       <a id="home" href="#" > 
-        <span v-if= "ki === 'KiDescendente'" @click='OrdenaKi()'>Ordenar por Ki Ascendente</span>  
-        <span v-else @click='OrdenaKi()'> Ordenar por Ki Descendente</span>  
+        <span v-if= "ki === 'KiDescendente'" @click='OrdenaKi()'>Ordenar por Ki Descendente</span>  
+        <span v-else @click='OrdenaKi()'> Ordenar por Ki Ascendente</span>  
       </a>
       <a id="home" href="#" > 
-         <span v-if= "price === 'PrecioDescendente' || price === '' " @click='OrdenaPrecio()'>Ordenar por Precio Ascendente</span> 
-        <span v-else @click='OrdenaPrecio()'> Ordenar por Precio Descendente</span>  
+         <span v-if= "price === 'PrecioDescendente' || price === '' " @click='OrdenaPrecio()'>Ordenar por Precio Descendente</span> 
+        <span v-else @click='OrdenaPrecio()'> Ordenar por Precio Ascendente</span>  
       </a>
          
      <a id="home" href="#" @click='Test()'> 
-        <span>Ordenar por novedades</span>  
+        <span @click='OrdenaNovedades()'>Ordenar por novedades</span>  
       </a>
     </Push>
 
@@ -28,7 +28,7 @@ export default {
   return {
       price :'',
       ki : 'KiAscendente',
-      news : '',
+      news : 'Novedades',
       laptops:[]
 
   }
@@ -58,6 +58,14 @@ export default {
         this.$emit('Ordena',this.laptops)
     })
     },
+
+         OrdenaNovedades() {
+       this.$http
+      .get("http://localhost:8000/api/laptopsList" + '?filter=' + this.news).then(result => {
+        this.laptops = result.data
+        this.$emit('Ordena',this.laptops)
+    })
+    },
 }
 }
 </script>
@@ -70,7 +78,8 @@ export default {
       left: 36px;
       top: 36px;
       cursor: pointer;
-      margin-top: 30px;
+      margin-top: 5%;
+      z-index: 1;
     }
     .bm-burger-bars {
       background-color: #373a47;

@@ -1,25 +1,31 @@
 <template>
-        <b-card v-if="laptop.name.length < 30" class='laptop-bcard' :title="laptop.name">
-        <b-card-text class="card-text">
+<div class ='container' >
+
+        <b-card class='laptop-bcard'>
+          <div class ='row justify-content-center'>
+          <b-card-text class='col'> {{laptop.name}}" </b-card-text>
+          </div>
+        <div class ='row justify-content-center'>
+        <img class='col-4' id="LaptopImagTag" alt="No image" :src="this.laptop.image_url"/>
+        </div>
+
+         <div class ='row justify-content-center'>
+        <b-card-text class='col'>
           <label for="price">{{ $t('price') }}:</label>
           {{laptop.bestPrice}}€
-        </b-card-text>
-        <b-card-text class="card-text">
-          <label for="ki">Ki:</label>
-          {{laptop.ki}}
         </b-card-text>
 
-        </b-card>
-        <b-card v-else class='laptop-bcard' :title="laptop.name.substring(0,30) + '...'">
-           <b-card-text class="card-text">
-          <label for="price">{{ $t('price') }}:</label>
-          {{laptop.bestPrice}}€
-        </b-card-text>
-        <b-card-text class="card-text">
+        </div>
+
+        <div class ='row justify-content-center'>
+        <b-card-text class='col'>
           <label for="ki">Ki:</label>
           {{laptop.ki}}
         </b-card-text>
+        </div>
+
         </b-card>
+</div>
 </template>
 
 <script>
@@ -59,5 +65,8 @@ export default {
 <style>
 .laptop-bcard {
   margin: 2em;
+}
+#LaptopImagTag{
+  max-width: 50%;
 }
 </style>
