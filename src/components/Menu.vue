@@ -13,23 +13,41 @@
      <a id="home" href="#" @click='Test()'> 
         <span @click='OrdenaNovedades()'>Ordenar por novedades</span>  
       </a>
+
+
+    <range-slider
+    class="slider"
+    min="0"
+    max="3000"
+    step="50"
+    v-model="precio">
+   
+  </range-slider>
+    <div id='Precio'>
+       Precio: {{precio}}€
+    </div>
+
     </Push>
 
 </template>
 
 
 <script>
+import RangeSlider from 'vue-range-slider'
+import 'vue-range-slider/dist/vue-range-slider.css'
 import { Push } from 'vue-burger-menu'
 export default {
     components:{
-        Push
+        Push,
+        RangeSlider
     },
      data(){
   return {
       price :'',
       ki : 'KiAscendente',
       news : 'Novedades',
-      laptops:[]
+      laptops:[],
+      precio:'0'
 
   }
   },
@@ -66,11 +84,22 @@ export default {
         this.$emit('Ordena',this.laptops)
     })
     },
-}
+  },watch:{
+   precio: function (precio) {
+     this.$emit('Precio',precio)
+   },
+   }
 }
 </script>
 
 <style>
+#Precio{
+  color:white;
+}
+.slider {
+  /* overwrite slider styles */
+  width: 200px;
+}
 .bm-burger-button {
       position: fixed;
       width: 36px;

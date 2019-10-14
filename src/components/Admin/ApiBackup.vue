@@ -1,0 +1,132 @@
+<template>
+<div id='ApiBackup'>
+
+
+<div id='content' class='row justify-content-center'>
+<button v-if="!loading" type="button" @click='LoadApi' class="btn btn-success">Cargar desde la API</button>
+<button v-if="!loading" type="button" @click='LoadBackup' class="btn btn-secondary">Cargar backup</button>
+<div v-if="loading" class="sk-rotating-plane"></div>
+</div>
+<div v-if="loading" class='row justify-content-center'> Esto podría tardar unos minutos </div>
+<div v-if="!loading && laptops != null && !laptops.length == 0" class='row justify-content-center'> <h2> Laptops cargados: </h2> </div>
+
+       <div class="laptopBox container" >
+       <div class="laptop" v-bind:key="laptop.id" v-for="(laptop, index) in laptops">
+     <router-link :to="{name: 'LaptopView', params:{laptopId : laptop.id}}" active-class='none'> 
+        <Laptop  :laptop = laptop> </Laptop>
+     </router-link>
+       </div>
+
+
+
+</div>
+</div>
+
+
+
+</template>
+
+
+<script>
+import Laptop from "../Laptop/LaptopView.vue";
+export default {
+  name: "app",
+  components: {
+      Laptop,
+  }, data(){
+  return {
+      laptops: [],
+      loading: false,
+      wait: '',
+
+  }
+  },
+  mounted: function() {
+
+
+
+  },  methods: {
+      LoadApi(){
+          this.loading = true;
+          let token = `JWT ${this.$cookies.get("token")}`;
+           this.$http
+            .get("http://localhost:8000/api/findLaptops", {
+              headers: { Authorization: token }
+            }).then(result => {
+              this.wait = result.data;
+            });
+             this.$http
+            .get("http://localhost:8000/api/loadBackup", {
+              headers: { Authorization: token }
+            })
+            .then(result => {
+              this.laptops = result.data;
+              this.loading = false;
+            });
+            
+            
+
+      },
+
+
+LoadBackup(){
+          this.loading = true;
+          let token = `JWT ${this.$cookies.get("token")}`;
+             this.$http
+            .get("http://localhost:8000/api/loadBackup", {
+              headers: { Authorization: token }
+            })
+            .then(result => {
+              this.loading = false;
+              if(result.data != null){
+              this.laptops = result.data;
+              }
+              
+            });
+            
+            
+
+      }
+
+
+  }
+}
+
+
+</script>
+
+<style>
+#content{
+margin-top:25%;
+margin-left:25%;
+margin-right:25%;
+}
+.sk-rotating-plane {
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  margin: 40px auto;
+  -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
+          animation: sk-rotatePlane 1.2s infinite ease-in-out; }
+@-webkit-keyframes sk-rotatePlane {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+@keyframes sk-rotatePlane {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+  </style>
+</style>

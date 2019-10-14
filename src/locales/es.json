@@ -273,5 +273,6 @@
   "success_profile": "Se ha guardado el perfil de forma satisfactoria.",
   "success_item": "Se ha guardado el item.",
   "sec_notification_title": "Notificación de brecha de seguridad lanzada",
-  "go_login":"Ir a iniciar sesión"
+  "go_login":"Ir a iniciar sesión",
+  "admin_tools":"Herramientas de Admin"
 }

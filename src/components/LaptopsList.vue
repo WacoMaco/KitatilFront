@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Menu @Ordena= "Ordena"/>  
+    <Menu  @Precio= "Precio" @Ordena= "Ordena"/>  
            
     <div id="page-wrap">
        <div class="laptopBox container" >
@@ -25,7 +25,6 @@
       :disableDecline="true"
       :transitionName="'slideFromBottom'"
       :showPostponeButton="false"
-      @status="cookieStatus"
       @clicked-decline="cookieClickedDecline"
     >
       
@@ -40,6 +39,7 @@
     </vue-cookie-accept-decline>
 
   </div>
+  
   </div>
 </template>
 
@@ -61,6 +61,7 @@ export default {
   data(){
   return {
       laptops: [],
+      laptopsCopy:[],
       filter: '',
       itemsCargados: false,
       test : [],
@@ -68,10 +69,10 @@ export default {
   }
   },
   mounted: function() {
-
       this.$http
       .get("http://localhost:8000/api/laptopsList",{Headers: {filter:''}}).then(result => {
         this.laptops = result.data
+        this.laptopsCopy = result.data
         this.itemsCargados = true
     }
     
@@ -88,14 +89,28 @@ export default {
     }
     this.$i18n.locale = lang;
       },
-  
+  computed:{
+    bottom: function() {
+      let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+      alert(bottomOfWindow)
+      if(bottomOfWindows){
+        alert('hi')
+
+      }
+    },
+  },
   methods: {
+  
     cookieClickedDecline() {
       window.history.back();
     },
     Ordena(laptops) {
       this.laptops = [];
       this.laptops = laptops;
+    },
+    Precio(Precio){
+
+      this.laptops = this.laptopsCopy.filter(laptop =>laptop.bestPrice > Precio)
     },
   Busca(finder){
    this.$http
@@ -105,7 +120,10 @@ export default {
     })
   },
 
-  },
+  
+
+  }, 
+
 
 };
 </script>

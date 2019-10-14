@@ -273,5 +273,6 @@
   "success_profile": "Successfully saved profile.",
   "success_item": "Sucessfully saved item.",
   "sec_notification_title": "Security breach notified",
-  "go_login":"Go to log in"
+  "go_login":"Go to log in",
+  "admin_tools":"Admin Tools"
 }

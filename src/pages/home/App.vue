@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar id="nav"/>
     <router-view :key="$route.fullPath" class="content"/>
-  <Footer/>
+  <Footer class='position-fixed'/>
   </div>
 </template>
 

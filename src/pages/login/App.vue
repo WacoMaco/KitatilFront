@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-
+  <div id="app" class='container'>
+    <div class='row justify-content-center'>
     <b-form id="form" @submit.prevent @submit="onSubmit" v-if="showForm">
       <label for="textUsername">{{$t('username')}}</label>
       <b-input type="text" v-model="form.username" id="textUsername"/>
@@ -16,7 +16,7 @@
       <br>
       <b-button type="submit" variant="primary">{{$t('login')}}</b-button>
     </b-form>
-
+  </div>
   </div>
 </template>
 
@@ -53,7 +53,7 @@ export default {
       var username = this.form.username;
       var password = this.form.password;
 
-      const baseURI = "https://api5-datame.herokuapp.com/api/v1/login";
+      const baseURI = "http://localhost:8000/api/login";
       this.$http
         .post(baseURI, {
           username: username,
@@ -67,7 +67,7 @@ export default {
           this.showNavbar = false;
           let token = `JWT ${this.$cookies.get("token")}`;
           this.$http
-            .get("https://api5-datame.herokuapp.com/api/v1/whoami", {
+            .get("http://localhost:8000/api/whoami", {
               headers: { Authorization: token }
             })
             .then(result => {

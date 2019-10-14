@@ -3,7 +3,7 @@
      <ul>
 <div id='OffersListFor' v-bind:key="offer.id" v-for="(offer) in offers">
          <a :href="offer.url">
-      <li :class="style" > 
+      <li id='offer' :class="style" > 
          <p class ='btn btn-primary'> {{offer.price}}€ </p>
           <p> Shipping costs: {{offer.shippingCost}}€ </p>
           <p> Shop: {{offer.shop}} </p>
@@ -27,3 +27,10 @@ export default {
     props:['offers'],
 }
 </script>
+
+<style >
+#offer:hover{
+    background: blue;
+    color: white;
+}
+</style>

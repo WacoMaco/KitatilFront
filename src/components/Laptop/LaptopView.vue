@@ -1,9 +1,9 @@
 <template>
-<div class ='container' >
+<div id='Laptop' class ='container' >
 
         <b-card class='laptop-bcard'>
           <div class ='row justify-content-center'>
-          <b-card-text class='col'> {{laptop.name}}" </b-card-text>
+          <b-card-text id ='LaptopCard' class='col'> {{laptop.name}}" </b-card-text>
           </div>
         <div class ='row justify-content-center'>
         <img class='col-4' id="LaptopImagTag" alt="No image" :src="this.laptop.image_url"/>
@@ -68,5 +68,8 @@ export default {
 }
 #LaptopImagTag{
   max-width: 50%;
+}
+#Laptop:hover{
+  transform: scale(1.2);
 }
 </style>

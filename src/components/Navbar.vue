@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
     <b-navbar class="custom-nav" toggleable="lg"  :sticky="true">
-      <b-navbar-brand href="/">
+      <b-navbar-brand>
         <router-link :to="{name:'Home'}"> <img id="Kimovil-logo" alt="Kimovil Logo" src="../assets/brand-name2.png"></router-link>
       </b-navbar-brand>
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -29,6 +29,7 @@
           </b-nav-form>
           <!--<b-nav-item href="/login.html" v-show="!isLoggedIn"><p class="accent-button">{{ $t('login') }}</p></b-nav-item>
           <b-nav-item href="/register.html" v-show="!isLoggedIn">{{ $t('signup') }}</b-nav-item>-->
+         <b-nav-item v-show="isLoggedIn && isAdmin"> <router-link :to="{name: 'AdminTools.api'}">  {{ $t('admin_tools') }} </router-link> </b-nav-item> 
           <b-nav-item href="#" v-show="isLoggedIn" @click="logOut">{{ $t('logout') }}</b-nav-item>
           <b-nav-item-dropdown :text="$t('lang')" v-model="$i18n.locale" right>
             <b-dropdown-item
@@ -62,30 +63,16 @@ export default {
       langs: ["English 🇬🇧", "Español 🇪🇸"],
       language: this.$t.lang,
       unviewedMessages: 0,
-      finder: ''
+      finder: '',
+      isAdmin: false,
     };
   },
   mounted: function() {
     //var token = 'JWT ' + this.$cookies.get('token')
 
-       if (this.getCookie("token")) {
-        var token = 'JWT ' + this.$cookies.get('token')
 
-        this.$http.get('https://api5-datame.herokuapp.com/api/v3/unvieweds',{ headers:
-        { Authorization: token }
-        }).then((result) => {
-
-            this.unviewedMessages = result.data.message
-        })
-
-
-     }
-
-    if (this.getCookie("user_type") == "com") {
-      this.isCompany = true;
-    } else if (this.getCookie("user_type") == "ds") {
-      this.isDataScientist = true;
-    } else if (this.getCookie("user_type") == "admin") {
+     
+      if (this.getCookie("user_type") == "admin") {
       this.isAdmin = true;
     }
 
