@@ -1,17 +1,19 @@
 <template>
-  <div id="app">
-    <Menu  @Precio= "Precio" @Ordena= "Ordena"/>  
+  <div id="ListaPortatiles">
+    <Menu  @precio="precioFun" @Ordena= "Ordena"/>  
            
     <div id="page-wrap">
        <div class="laptopBox container" >
-
        <div class="laptop" v-bind:key="laptop.id" v-for="(laptop, index) in laptops">
      <router-link :to="{name: 'LaptopView', params:{laptopId : laptop.id}}" active-class='none'> 
         <Laptop  :laptop = laptop> </Laptop>
      </router-link>
        </div>
-
+       <div style="margin:auto;">
+       <button v-if="!this.fin" class='ShowMore' v-on:click="loadMore">+ </button>
        </div>
+       </div>
+
     <div class ='none' v-if="itemsCargados == true && (laptops == none || laptops.length == 0)">
        <h2 id="NadaQueMostrar"> {{$t('nothing_to_show')}} </h2>
     </div>
@@ -39,7 +41,7 @@
     </vue-cookie-accept-decline>
 
   </div>
-  
+
   </div>
 </template>
 
@@ -65,15 +67,21 @@ export default {
       filter: '',
       itemsCargados: false,
       test : [],
+      laptopsLoaded: 0,
+      fin: false,
+      min_price: 0,
+      max_price: 3000,
 
   }
   },
   mounted: function() {
       this.$http
-      .get("http://localhost:8000/api/laptopsList",{Headers: {filter:''}}).then(result => {
-        this.laptops = result.data
-        this.laptopsCopy = result.data
-        this.itemsCargados = true
+      .get("http://localhost:8000/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
+       "&min_price=" + this.min_price + "&max_price=" + this.max_price).then(result => {
+        this.laptops = result.data;
+        this.laptopsCopy = result.data;
+        this.laptopsLoaded = this.laptopsLoaded + 12;
+        this.itemsCargados = true;
     }
     
     );
@@ -90,27 +98,49 @@ export default {
     this.$i18n.locale = lang;
       },
   computed:{
-    bottom: function() {
-      let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-      alert(bottomOfWindow)
-      if(bottomOfWindows){
-        alert('hi')
 
-      }
-    },
   },
   methods: {
+
+    loadMore(){
+      this.$http
+      .get("http://localhost:8000/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
+       "&min_price=" + this.min_price + "&max_price=" + this.max_price).then(result => {
+        this.laptops = this.laptops.concat(result.data);
+        this.laptopsCopy = this.laptopsCopy.concat(result.data);
+        if(result.data.length < 12){
+          this.laptopsLoaded = this.laptopsLoaded + result.data.length;
+          this.fin = true;
+        } else{
+          this.laptopsLoaded = this.laptopsLoaded + 12;
+        }
+        this.itemsCargados = true;
+    }
+    
+    );
+
+    },
+
   
     cookieClickedDecline() {
       window.history.back();
     },
-    Ordena(laptops) {
+    Ordena(filter) {
+      this.filter = filter;
+      this.laptopsLoaded = 0;
       this.laptops = [];
-      this.laptops = laptops;
+      this.laptopsCopy = [];
+      this.fin = false;
+      this.loadMore();
     },
-    Precio(Precio){
-
-      this.laptops = this.laptopsCopy.filter(laptop =>laptop.bestPrice > Precio)
+    precioFun(precios){
+      this.min_price =precios[0];
+      this.max_price = precios[1];
+      this.fin = false;
+      this.laptopsLoaded = 0;
+      this.laptops = [];
+      this.laptopsCopy = [];
+      this.loadMore();
     },
   Busca(finder){
    this.$http
@@ -140,10 +170,6 @@ h1.title {
   font-size: 4rem;
 }
 
-#nav {
-  z-index: 999;
-  position:sticky
-}
 
 #particles-js {
   background-size: cover;
@@ -202,11 +228,37 @@ width: 25%;
 
 .laptopBox{
  
-display: inline-flex;
+display: flex;
 flex-flow: wrap;
 }
 #page-wrap{
     display:flex;
+}
+
+
+.ShowMore {
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	background-color:#44c767;
+	border-radius:42px;
+	border:50% solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+  width: 50px;
+  height: 50px;
+
+}
+.ShowMore:hover {
+	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+	background-color:#5cbf2a;
+}
+.ShowMore:active {
+	position:relative;
+	top:1px;
 }
 
 </style>

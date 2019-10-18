@@ -8,6 +8,7 @@ import Login from "../login/App";
 import TermsAndConditions from "../terms_and_conditions/App";
 import AdminTools from '@/components/Admin/AdminTools.vue'
 import ApiBackup from '@/components/Admin/ApiBackup.vue'
+import SpecificationScore from '@/components/Specifications/SpecificationEdit.vue'
 
 
 Vue.use(Router)
@@ -27,7 +28,12 @@ export default new Router({
                   path:'apibackup',
                   component:ApiBackup,
                   name:'AdminTools.api',
-              }
+              },
+              {
+                path:'specifications',
+                component:SpecificationScore,
+                name:'AdminTools.scores',
+            }
           ]},
     ],
     linkActiveClass: "active",

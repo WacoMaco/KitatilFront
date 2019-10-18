@@ -1,17 +1,16 @@
 <template>
    
      <Push>
-      <a id="home" href="#" > 
-        <span @click='OrdenaKi()'>Cargar desde la API</span>  
-      </a>
+     <router-link :to="{name: 'AdminTools.api'}">
+        <span>Cargar desde la API</span>  
+      </router-link> 
          
-     <a id="home" href="#" @click='Test()'> 
-        <span @click='OrdenaNovedades()'>Cargar manualmente</span>  
-      </a>
-
-      <a id="home" href="#" @click='Test()'> 
-        <span @click='OrdenaNovedades()'>Puntuar Especificaciones</span>  
-      </a>
+ 
+        <span>Cargar manualmente</span>  
+      
+    <router-link :to="{name: 'AdminTools.scores'}">   
+        <span>Puntuar Especificaciones</span>  
+      </router-link>
     </Push>
 
 </template>

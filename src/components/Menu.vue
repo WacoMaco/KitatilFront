@@ -1,13 +1,13 @@
 <template>
    
-     <Push>
+     <Push disableOutsideClick>
       <a id="home" href="#" > 
         <span v-if= "ki === 'KiDescendente'" @click='OrdenaKi()'>Ordenar por Ki Descendente</span>  
         <span v-else @click='OrdenaKi()'> Ordenar por Ki Ascendente</span>  
       </a>
       <a id="home" href="#" > 
-         <span v-if= "price === 'PrecioDescendente' || price === '' " @click='OrdenaPrecio()'>Ordenar por Precio Descendente</span> 
-        <span v-else @click='OrdenaPrecio()'> Ordenar por Precio Ascendente</span>  
+         <span v-if= "price === 'PrecioDescendente' || price === '' " @click='OrdenaPrecio()'>Ordenar por Precio Ascendente</span> 
+        <span v-else @click='OrdenaPrecio()'> Ordenar por Precio Descendente</span>  
       </a>
          
      <a id="home" href="#" @click='Test()'> 
@@ -15,17 +15,9 @@
       </a>
 
 
-    <range-slider
-    class="slider"
-    min="0"
-    max="3000"
-    step="50"
-    v-model="precio">
-   
-  </range-slider>
-    <div id='Precio'>
-       Precio: {{precio}}€
-    </div>
+  <vue-slider :tooltip-formatter="formatter" @drag-end="precioFun" :enable-cross="false" :min='0' :max='3000' :adsorb="true" :interval="50"  v-model="precio" > 
+  </vue-slider>
+
 
     </Push>
 
@@ -33,48 +25,48 @@
 
 
 <script>
-import RangeSlider from 'vue-range-slider'
-import 'vue-range-slider/dist/vue-range-slider.css'
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/material.css'
 import { Push } from 'vue-burger-menu'
 export default {
     components:{
         Push,
-        RangeSlider
+        VueSlider
     },
      data(){
   return {
       price :'',
       ki : 'KiAscendente',
       news : 'Novedades',
+      filter: '',
       laptops:[],
-      precio:'0'
+      precio:[0,2500],
+      formatter: '{value}€',
 
   }
   },
   methods: {
     OrdenaKi() {
         if (this.ki == 'KiAscendente'){
-            this.ki = 'KiDescendente'
+            this.ki = 'KiDescendente';
+            this.filter = 'KiDescendente';
         } else{
             this.ki = 'KiAscendente'
+            this.filter = 'KiAscendente'
         }
-       this.$http
-      .get("http://localhost:8000/api/laptopsList" + '?filter=' + this.ki).then(result => {
-        this.laptops = result.data
-        this.$emit('Ordena',this.laptops)
-    })
+        this.$emit('Ordena',this.filter)
+
     },
      OrdenaPrecio() {
         if (this.price == 'PrecioAscendente' || this.price == ''){
             this.price = 'PrecioDescendente'
+            this.filter = 'PrecioDescendente'
         } else{
             this.price = 'PrecioAscendente'
+            this.filter = 'PrecioAscendente'
         }
-       this.$http
-      .get("http://localhost:8000/api/laptopsList" + '?filter=' + this.price).then(result => {
-        this.laptops = result.data
-        this.$emit('Ordena',this.laptops)
-    })
+      
+        this.$emit('Ordena',this.filter)
     },
 
          OrdenaNovedades() {
@@ -84,19 +76,19 @@ export default {
         this.$emit('Ordena',this.laptops)
     })
     },
-  },watch:{
-   precio: function (precio) {
-     this.$emit('Precio',precio)
+    precioFun: function () {
+     this.$emit('precio',this.precio)
    },
-   }
+  },
 }
 </script>
 
 <style>
-#Precio{
-  color:white;
-}
-.slider {
+
+
+
+
+.vue-slider.vue-slider-ltr {
   /* overwrite slider styles */
   width: 200px;
 }

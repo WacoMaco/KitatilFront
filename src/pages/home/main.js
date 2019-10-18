@@ -6,6 +6,7 @@ import axios from 'axios'
 import i18n from '../../i18n'
 import VueRouter from 'vue-router';
 import router from '../router'
+import EvaIcons from 'vue-eva-icons'
 
 import "vue-cookie-accept-decline/dist/vue-cookie-accept-decline.css";
 import VueCookieAcceptDecline from "vue-cookie-accept-decline";
@@ -20,6 +21,7 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
 Vue.use(VueCookies)
+Vue.use(EvaIcons) 
 Vue.prototype.$http = axios
 
 

@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <Navbar id="nav"/>
-    <router-view :key="$route.fullPath" class="content"/>
-  <Footer class='position-fixed'/>
+  <div id="app" style="height: 100%;">
+    <Navbar id="nav" style="z-index: 999;position:sticky"/>
+    <router-view style="min-height: 100%;margin: 0 auto -50px;" :key="$route.fullPath" class="content"/>
+  <Footer/>
   </div>
 </template>
 
@@ -32,7 +32,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 .content{
   display: flex;
 }
+
+
+
+
+

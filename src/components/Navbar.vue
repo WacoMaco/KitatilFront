@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <b-navbar class="custom-nav" toggleable="lg"  :sticky="true">
+    <b-navbar class="custom-nav" toggleable="lg">
       <b-navbar-brand>
         <router-link :to="{name:'Home'}"> <img id="Kimovil-logo" alt="Kimovil Logo" src="../assets/brand-name2.png"></router-link>
       </b-navbar-brand>
@@ -140,6 +140,8 @@ export default {
 .custom-nav {
   background-color:  rgb(150, 150, 244);
   top:0px;
+  position: fixed;
+  width: 100%;
 }
 .accent-button {
   background-color: #22546f !important;
