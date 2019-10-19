@@ -6,11 +6,13 @@
 <h2> {{laptop.name}}</h2>
 
 <div id= 'cabecera' class='row'>
-<div id='LaptopImage' class='.col-sm-'>
+
+<div id='LaptopImage' class='col justify-content-center'>
 <img id="LaptopImagTag" alt="No image" :src="this.laptop.image_url"/>
 </div>
 
-<div id ='Score Graphic' class='col'>
+<div id ='Score Graphic justify-content-center' class="col">
+    <Chart/>
 </div>
 
 </div>
@@ -35,12 +37,13 @@
 
 import Specificationlist from "./Specifications/Specificationlist.vue";
 import OfferList from "./Offers/OffersList.vue";
+import Chart from "./Laptop/Chart.vue"
 
 export default {
-    name: "app",
     components: {
         Specificationlist,
         OfferList,
+        Chart
   },
     props:['laptopId'],
     data(){
@@ -49,8 +52,9 @@ export default {
             laptop : [],
             specifications: [],
             offers:[],
-
         }
+
+        
     },
 
  mounted: function() {

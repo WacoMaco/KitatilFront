@@ -21,7 +21,7 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
 Vue.use(VueCookies)
-Vue.use(EvaIcons) 
+Vue.use(EvaIcons)
 Vue.prototype.$http = axios
 
 

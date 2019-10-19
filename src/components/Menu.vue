@@ -1,22 +1,24 @@
 <template>
    
      <Push disableOutsideClick>
-      <a id="home" href="#" > 
-        <span v-if= "ki === 'KiDescendente'" @click='OrdenaKi()'>Ordenar por Ki Descendente</span>  
-        <span v-else @click='OrdenaKi()'> Ordenar por Ki Ascendente</span>  
+      <a class="row justify-content-center" id="home" href="#" > 
+        <span class="filaMenu" v-if= "ki === 'KiDescendente'" @click='OrdenaKi()'>Ordenar por Ki <eva-icon name="arrow-circle-down"> </eva-icon></span>  
+        <span class="filaMenu" v-else @click='OrdenaKi()'>Ordenar por Ki <eva-icon name="arrow-circle-up"></eva-icon></span>  
       </a>
-      <a id="home" href="#" > 
-         <span v-if= "price === 'PrecioDescendente' || price === '' " @click='OrdenaPrecio()'>Ordenar por Precio Ascendente</span> 
-        <span v-else @click='OrdenaPrecio()'> Ordenar por Precio Descendente</span>  
+      <a class="row justify-content-center" id="home" href="#" > 
+         <span class="filaMenu" v-if= "price === 'PrecioDescendente' || price === '' " @click='OrdenaPrecio()'>Ordenar por precio <eva-icon name="arrow-circle-down"></eva-icon></span> 
+        <span class="filaMenu" v-else @click='OrdenaPrecio()'>Ordenar por precio <eva-icon name="arrow-circle-up"></eva-icon></span>  
       </a>
          
-     <a id="home" href="#" @click='Test()'> 
-        <span @click='OrdenaNovedades()'>Ordenar por novedades</span>  
+     <a class="row justify-content-center" id="home" href="#" @click='Test()'> 
+        <span class="filaMenu" @click='OrdenaNovedades()'>Novedades:🆕</span>  
       </a>
 
 
-  <vue-slider :tooltip-formatter="formatter" @drag-end="precioFun" :enable-cross="false" :min='0' :max='3000' :adsorb="true" :interval="50"  v-model="precio" > 
+  <vue-slider class="PrecioSlider" :marks="marksPrecio" :tooltip-formatter="formatter" @drag-end="precioFun" :enable-cross="false" :min='0' :max='2000' :adsorb="true" :interval="50"  v-model="precio" > 
   </vue-slider>
+
+  
 
 
     </Push>
@@ -26,7 +28,7 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/material.css'
+import 'vue-slider-component/theme/default.css'
 import { Push } from 'vue-burger-menu'
 export default {
     components:{
@@ -40,8 +42,17 @@ export default {
       news : 'Novedades',
       filter: '',
       laptops:[],
-      precio:[0,2500],
+      precio:[0,2000],
       formatter: '{value}€',
+       marksPrecio: val => val % 500 === 0? ({
+          label: `${val}€`,
+          labelStyle: {
+            opacity: val * 0.01 * 0.7 + 0.3
+          },
+          labelActiveStyle: {
+            color: 'white'
+          }
+        }) : false
 
   }
   },
@@ -69,12 +80,8 @@ export default {
         this.$emit('Ordena',this.filter)
     },
 
-         OrdenaNovedades() {
-       this.$http
-      .get("http://localhost:8000/api/laptopsList" + '?filter=' + this.news).then(result => {
-        this.laptops = result.data
-        this.$emit('Ordena',this.laptops)
-    })
+      OrdenaNovedades() {
+        this.$emit('Ordena',this.news)
     },
     precioFun: function () {
      this.$emit('precio',this.precio)
@@ -91,6 +98,11 @@ export default {
 .vue-slider.vue-slider-ltr {
   /* overwrite slider styles */
   width: 200px;
+}
+
+.kiOrder{
+  height: 25px;
+  width: auto;
 }
 .bm-burger-button {
       position: fixed;
@@ -154,5 +166,8 @@ export default {
       margin-left: 10px;
       font-weight: 700;
       color: white;
+    }
+    .PrecioSlider{
+      width:90% !important;
     }
 </style>

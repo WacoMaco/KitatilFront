@@ -6,11 +6,21 @@
       </b-navbar-brand>
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         
-        <div class="finder">
+        <div class="row justify-content-center finder">
         <input type="text" v-model="finder" placeholder="Search title.." v-on:keyup='search'/>
-        <div id ='FinderBox'  v-if='finder != ""'>
-        <div id='LaptopsFinder' v-bind:key="laptop.id" v-for="(laptop, index) in laptopsFinder">
-       <router-link :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> <b-card  class='laptop-bcard' :title="laptop.name"/> </router-link>
+        <div id ='FinderBox' v-if='finder != ""'>
+        <div id='LaptopsFinder'  v-bind:key="laptop.id" v-for="(laptop, index) in laptopsFinder">
+       <router-link :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> 
+         <div class="row FinderRow"> 
+           <div class="col FinderName">
+           {{laptop.name}} 
+           </div>
+            <div class="col-4">
+            <img id="LaptopImagTag" alt="No image" :src="laptop.image_url"/>
+          </div>
+           </div> 
+
+         </router-link>
         
         </div>
         </div>
@@ -181,6 +191,12 @@ export default {
   position: absolute;
   background: blue;
   MAX-WIDTH: 500px;
+
+}
+.FinderRow{
+  background: white;
+  border: 5px outset #1C6EA4;
+  padding-top: 10px;
 }
 
 .card-body{
@@ -189,6 +205,8 @@ export default {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
+
 
 input {
       padding: 4px 12px;

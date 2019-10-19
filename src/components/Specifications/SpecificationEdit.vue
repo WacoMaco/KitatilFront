@@ -9,12 +9,6 @@
 
 
 <v-select @input="saveSpecification" v-model="specificationSelected" label="name" :options="this.specifications">
-<template slot="specification" slot-scope="specification">
-   <div> {{spe}} </div>
-    </template>
-
-
-
 </v-select>
 
 </div>
