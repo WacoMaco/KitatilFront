@@ -2,15 +2,15 @@
   <div id="nav">
     <b-navbar class="custom-nav" toggleable="lg">
       <b-navbar-brand>
-        <router-link :to="{name:'Home'}"> <img id="Kimovil-logo" alt="Kimovil Logo" src="../assets/brand-name2.png"></router-link>
+        <router-link :to="{name:'Home'}"> <img id="Kimovil-logo" alt="Kimovil Logo" src="../assets/brand-name2.png"/></router-link>
       </b-navbar-brand>
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         
         <div class="row justify-content-center finder">
-        <input type="text" v-model="finder" placeholder="Search title.." v-on:keyup='search'/>
-        <div id ='FinderBox' v-if='finder != ""'>
+        <input id="FinderInput" type="text" v-model="finder" placeholder="Search title.." v-on:focus='GainFocus' v-on:keyup='search'/>
+        <div id ='FinderBox' v-if='finder != "" && focused'>
         <div id='LaptopsFinder'  v-bind:key="laptop.id" v-for="(laptop, index) in laptopsFinder">
-       <router-link :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> 
+       <router-link v-on:click.native="LoseFocus" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> 
          <div class="row FinderRow"> 
            <div class="col FinderName">
            {{laptop.name}} 
@@ -75,6 +75,7 @@ export default {
       unviewedMessages: 0,
       finder: '',
       isAdmin: false,
+      focused: false,
     };
   },
   mounted: function() {
@@ -97,6 +98,12 @@ export default {
     }
   },
   methods: {
+    LoseFocus(){
+      this.focused = false;
+    },
+    GainFocus(){
+      this.focused = true;
+    },
     getCookie: function(name) {
       var v = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
       return v ? v[2] : null;
@@ -137,7 +144,6 @@ export default {
   },
   },
   computed: {
-
   }
 };
 </script>
@@ -191,6 +197,7 @@ export default {
   position: absolute;
   background: blue;
   MAX-WIDTH: 500px;
+    margin-top:50px;
 
 }
 .FinderRow{

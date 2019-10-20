@@ -10,18 +10,13 @@
         </div>
 
          <div class ='row justify-content-center'>
-        <b-card-text class='col'>
-          <label for="price">{{ $t('price') }}:</label>
-          {{laptop.bestPrice}}€
-        </b-card-text>
+         <div id="LaptopInfo" class="btn btn-primary"> {{laptop.bestPrice}}€ </div>
 
         </div>
 
-        <div class ='row justify-content-center'>
-        <b-card-text class='col'>
-          <label for="ki">Ki:</label>
-          {{laptop.ki}}
-        </b-card-text>
+        <div  class ='row justify-content-center'>
+          <div id="LaptopInfo" class="btn btn-primary"><img class="logo" alt="Kimovil Logo" src="../../assets/logo.png"/> {{laptop.ki}} </div>
+
         </div>
 
         </b-card>
@@ -71,5 +66,15 @@ export default {
 }
 #Laptop:hover{
   transform: scale(1.2);
+  text-decoration: none;
+}
+#LaptopInfo{
+  margin-top:1%;
+  border-radius: 20px;
+  padding: 1px 5px;
+}
+.logo{
+  height: 20px;
+  width: auto;
 }
 </style>

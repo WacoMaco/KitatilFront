@@ -10,12 +10,15 @@
 <div id='LaptopImage' class='col justify-content-center'>
 <img id="LaptopImagTag" alt="No image" :src="this.laptop.image_url"/>
 </div>
-
+<div id="ki" class ='col-2'>
+     <div id="LaptopInfo" class="btn btn-primary"><img class="logo" alt="Kimovil Logo" src="../assets/logo.png"/> {{laptop.ki}} </div>
+</div>
 <div id ='Score Graphic justify-content-center' class="col">
     <Chart/>
 </div>
 
 </div>
+
 <div class ='row'>
 
 <div id ="Specifications" class='col'>
@@ -69,3 +72,11 @@ export default {
  }
 }
 </script>
+
+<style scoped>
+#ki{
+    margin:auto;
+}
+
+
+</style>

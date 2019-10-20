@@ -30,7 +30,7 @@ export default {
 
 <style >
 #offer:hover{
-    background: blue;
+    background:darkslateblue;
     color: white;
 }
 </style>

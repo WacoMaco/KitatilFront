@@ -203,7 +203,7 @@ h2.statement {
 .laptop{
 width: 25%;
 }
-@media all and (max-width: 900px) {
+@media all and (max-width: 1000px) {
   h2.statement {
     font-size: 1.4rem;
   }
