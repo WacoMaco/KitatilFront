@@ -1,7 +1,9 @@
 <template>
 <div id='app' class="container">
 
-
+<div v-id="isAdmin">
+ <router-link class="btn btn-success" :to="{name: 'LaptopEdit', params:{laptopId : laptop.id}}"> Editar </router-link>
+</div>
 
 <h2> {{laptop.name}}</h2>
 
@@ -55,6 +57,7 @@ export default {
             laptop : [],
             specifications: [],
             offers:[],
+            isAdmin: false,
         }
 
         
@@ -62,13 +65,21 @@ export default {
 
  mounted: function() {
 
-      this.$http.get('http://localhost:8000/api/laptopView?laptopId='+ this.$route.params.laptopId).then((result) => {
+    this.$http.get('http://localhost:8000/api/laptopView?laptopId='+ this.$route.params.laptopId).then((result) => {
             this.laptop = result.data.Laptop
             this.specifications = result.data.Specifications
             this.offers = result.data.Offers
         })
+    if (this.getCookie("user_type") == "admin") {
+      this.isAdmin = true;
+    }
  
 
+ }, methods: {
+     getCookie: function(name) {
+      var v = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+      return v ? v[2] : null;
+    },
  }
 }
 </script>

@@ -33,25 +33,6 @@ export default {
     },
     props:['laptop'],
     methods:{
-        deleteLaptop(laptop_id, text){
-            var token = "JWT " + this.$cookies.get("token");
-            const formData = new FormData();
-            formData.append('laptop_id', laptop_id);
-            this.$bvModal.msgBoxConfirm(text, {
-              okTitle:this.$t('accept'),
-              cancelTitle:this.$t('cancel')
-            }).then(value => {
-              if(value === true){
-                this.$http
-                  .post(" https://api5-datame.herokuapp.com/api/v2/delete_laptop", formData, {
-                    headers: { Authorization: token }
-                  })
-                  .then(result => {
-                    location.reload();
-                  });
-              }
-            })
-        }
     }
 }
 
