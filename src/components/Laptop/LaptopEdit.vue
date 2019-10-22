@@ -1,6 +1,7 @@
 <template>
 <div id='app' class="container">
 
+
 <div v-id="isAdmin">
  <router-link class="btn btn-primary" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> Dejar de editar </router-link>
 </div>
@@ -22,19 +23,28 @@
 
 </div>
 
-<div class = 'row'>
-<div class = 'col'>
+<div class = 'row scoresEditBox'>
+<div class='col'>
 <label for="batteryScore">Battery Score: </label>
-<input v-model.number="batteryScore" type="number">
+<input v-on:keydown="keyboard" :max="5" :min=0 class="ScoreEdit form-control" v-model.number="batteryScore" type="number">
+</div>
+<div class='col'>
 <label for="batteryScore">Other Score: </label>
-<input v-model.number="otherScore" type="number">
+<input v-on:keydown="keyboard" :max="5" :min=0 class="ScoreEdit form-control" v-model.number="otherScore" type="number">
+</div>
+<div class='col'>
 <label for="performanceScore">Performance Score: </label>
-<input v-model.number="performanceScore" type="number">
+<input v-on:keydown="keyboard" :max="5" :min=0 class="ScoreEdit form-control" v-model.number="performanceScore" type="number">
+</div>
+<div class='col'>
 <label for="displayScore">Display Score: </label>
-<input v-model.number="displayScore" type="number">
+<input v-on:keydown="keyboard" :max="5" :min=0 class="ScoreEdit form-control" v-model.number="displayScore" type="number">
 </div>
 </div>
 
+<div class="row justify-content-center">
+<div v-on:click="SaveConfirm" class="btn btn-primary"> Guardar </div>
+</div>
 
 <div class ='row'>
 
@@ -127,6 +137,38 @@ export default {
  
 
  }, methods:{
+     SaveConfirm(){
+      this.$bvModal.msgBoxConfirm('¿Quieres guardar las scores?')
+          .then(value => {
+            if(value == true){
+                this.SaveScore();
+            }
+          })
+     },
+     SaveScore(){
+        const formData = new FormData();
+        var token = "JWT " + this.$cookies.get("token");
+        formData.append("performanceScore", this.performanceScore);
+        formData.append("otherScore", this.otherScore);
+        formData.append("batteryScore", this.batteryScore);
+        formData.append("displayScore", this.displayScore);
+        formData.append("id", this.laptop.id);
+        this.$http
+      .post("http://localhost:8000/api/saveScores",formData,{
+          headers: { Authorization: token }
+        }).then(result => {
+        this.$bvModal.msgBoxOk('Scores guardados',  {
+                    okTitle:'Aceptar'
+                  });
+        });
+     },
+     keyboard(event){
+         if(event.key != "1" && event.key != "0"  && event.key != "2"  && event.key != "3"  && event.key != "4" 
+          && event.key != "5" ){
+            event.preventDefault();
+         }
+
+     },
      saveSpecification(id, score){
         const formData = new FormData();
         var token = "JWT " + this.$cookies.get("token");
@@ -148,7 +190,7 @@ export default {
         }
         return res
     }
- }
+ }, 
 }
 </script>
 
@@ -167,6 +209,13 @@ padding-bottom: 50px !important;
 }
 .slider{
     width: 95% !important;
+}
+.ScoreEdit{
+    width: 50px;
+    margin-right: 10px;
+}
+.scoresEditBox{
+    margin-bottom: 20px;
 }
 
 </style>

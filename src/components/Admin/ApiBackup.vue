@@ -53,6 +53,7 @@ export default {
             .get("http://localhost:8000/api/findLaptops", {
               headers: { Authorization: token }
             }).then(result => {
+              alert(result.data)
               this.wait = result.data;
             });
              this.$http
