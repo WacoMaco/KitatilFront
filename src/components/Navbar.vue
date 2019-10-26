@@ -154,7 +154,9 @@ export default {
 }
 
 .custom-nav {
-  background-color:  rgb(150, 150, 244);
+background: -moz-linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75%,#f708ab 100%); 
+background: -webkit-linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75%,#f708ab 100%); 
+background: linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75%,#f708ab 100%);
   top:0px;
   position: fixed;
   width: 100%;

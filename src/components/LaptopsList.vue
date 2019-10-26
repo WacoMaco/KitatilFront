@@ -3,7 +3,7 @@
     <Menu  @precio="precioFun" @Ordena= "Ordena"/>  
            
     <div id="page-wrap">
-       <div class="laptopBox container" >
+       <div v-if="laptops.length > 0" class="laptopBox container" >
        <div class="laptop" v-bind:key="laptop.id" v-for="(laptop, index) in laptops">
      <router-link :to="{name: 'LaptopView', params:{laptopId : laptop.id}}" active-class='none'> 
         <Laptop  :laptop = laptop> </Laptop>
@@ -259,6 +259,9 @@ flex-flow: wrap;
 .ShowMore:active {
 	position:relative;
 	top:1px;
+}
+.none{
+  margin:auto;
 }
 
 </style>

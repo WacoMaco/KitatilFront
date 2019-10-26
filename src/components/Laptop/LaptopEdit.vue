@@ -2,8 +2,8 @@
 <div id='app' class="container">
 
 
-<div v-id="isAdmin">
- <router-link class="btn btn-primary" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> Dejar de editar </router-link>
+<div class="EditButton" v-id="isAdmin">
+ <router-link class="btn btn-primary" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> {{this.$t('StopEdit')}} </router-link>
 </div>
 
 
@@ -51,15 +51,15 @@
 <table class="col table-primary table-striped">
 <thead>
     <tr style="text-align:center;">
-      <th class="TypeCol" >Type</th>
-      <th >Name</th>
-      <th class="ScoreCol" >Score</th>
+      <th class="TypeCol" >{{this.$t('Type')}}</th>
+      <th >{{this.$t('Name')}}</th>
+      <th class="ScoreCol" >{{this.$t('Score')}}</th>
     </tr>
   </thead>
 <tbody>
 <tr id='SpecificationsLaptop'  v-bind:key="specification.id" v-for="specification in specifications"> 
-      <td >{{specification.type}}</td>
-      <td class="NameCol">{{specification.name}}</td>
+      <td >{{changetype(specification.type)}}</td>
+      <td class="NameCol"> <input class ="SpecificationEditInput" v-model="specification.name" ></td>
       <td v-if="filter(specification.type)"><vue-slider class="slider" @drag-end="saveSpecification(specification.id,specification.score)" :marks="marks" :tooltip-formatter="formatter" :enable-cross="false" :min='0' :max='5' :adsorb="true" :interval="0.1"  v-model="specification.score" > 
   </vue-slider>
 
@@ -185,10 +185,134 @@ export default {
         console.log(type)
         if(type == 'CPU' || type == 'GPU' || type == 'STORAGE' || type == 'CPU_MAX' || type == 'BATERY_DURATION' || 
         type == 'CACHE' || type == 'RAM' || type == 'CAMERA' || type == 'MEMORY_CARDS' || type == 'DISPLAY_RESOLUTION' 
-        || type == 'DISPLAY' || type == 'WIRELESS' || type == 'STORAGE2'){
+        || type == 'DISPLAY' || type == 'WIRELESS' || type == 'STORAGE2' || type == 'RAM_VELOCITY' || type == 'SOFTWARE' || type == 'INTERFACES'){
             res =  true
         }
         return res
+    },
+    changetype(type){
+      var res = '';
+      if(type == "WEIGHT"){
+        res = this.$t('WEIGHT')
+      }
+      else if(type == "DISPLAY"){
+         res = this.$t('DISPLAY')
+      }
+      else if(type == "RAM"){
+         res = this.$t('RAM')
+      }
+      else if(type == "DISPLAY_RESOLUTION"){
+         res = this.$t('DISPLAY_RESOLUTION')
+      }
+      else if(type == "RAM_VELOCITY"){
+         res = this.$t('RAM_VELOCITY')
+      }
+      else if(type == "BATERY_TECNOLOGY"){
+         res = this.$t('BATERY_TECNOLOGY')
+      }
+      else if(type == "CPU_MAX"){
+         res = this.$t('CPU_MAX')
+      }
+      else if(type == "BATERY_CAPACITY"){
+         res = this.$t('BATERY_CAPACITY')
+      }
+      else if(type == "STORAGE"){
+         res = this.$t('STORAGE')
+      }
+      else if(type == "DIMENTIONS"){
+         res = this.$t('DIMENTIONS')
+      }
+      else if(type == "CACHE"){
+         res = this.$t('CACHE')
+      }
+      else if(type == "PANORAMIC"){
+         res = this.$t('PANORAMIC')
+      }
+      else if(type == "STORAGE2"){
+         res = this.$t('STORAGE2')
+      }
+      else if(type == "BRIGHTNESS"){
+         res = this.$t('BRIGHTNESS')
+      }
+      else if(type == "DISPLAY_COEFICENT"){
+         res = this.$t('DISPLAY_COEFICENT')
+      }
+      else if(type == "WIRELESS"){
+         res = this.$t('WIRELESS')
+      }
+      else if(type == "SOUND"){
+         res = this.$t('SOUND')
+      }
+      else if(type == "RAM_TECNOLOGY"){
+         res = this.$t('RAM_TECNOLOGY')
+      }
+      else if(type == "KEYBOARD_LANG"){
+         res = this.$t('KEYBOARD_LANG')
+      }
+      else if(type == "GARANTY"){
+         res = this.$t('GARANTY')
+      }
+      else if(type == "BATERY_DURATION"){
+         res = this.$t('BATERY_DURATION')
+      }
+      else if(type == "BATERY_DURATION"){
+         res = this.$t('BATERY_DURATION')
+      }
+      else if(type == "BRAND"){
+         res = this.$t('BRAND')
+      }
+      else if(type == "DISPLAY_INFO"){
+         res = this.$t('DISPLAY_INFO')
+      }
+      else if(type == "CPU"){
+         res = this.$t('CPU')
+      }
+      else if(type == "CPU_INFO"){
+         res = this.$t('CPU_INFO')
+      }
+      else if(type == "SECURITY"){
+         res = this.$t('SECURITY')
+      }
+      else if(type == "DISPLAY_ILUMINATION"){
+         res = this.$t('DISPLAY_ILUMINATION')
+      }
+      else if(type == "GPU"){
+         res = this.$t('GPU')
+      }
+      else if(type == "GPU_TECNOLOGY"){
+         res = this.$t('GPU_TECNOLOGY')
+      }
+      else if(type == "KEYBOARD_NUMERIC"){
+         res = this.$t('KEYBOARD_NUMERIC')
+      }
+      else if(type == "SOFTWARE"){
+         res = this.$t('SOFTWARE')
+      }
+      else if(type == "COLOR"){
+         res = this.$t('COLOR')
+      }
+      else if(type == "CORES"){
+         res = this.$t('CORES')
+      }
+      else if(type == "PROTECTION"){
+         res = this.$t('PROTECTION')
+      }
+      else if(type == "CAMERA"){
+         res = this.$t('CAMERA')
+      }
+      else if(type == "MEMORY_CARDS"){
+         res = this.$t('MEMORY_CARDS')
+      }
+      else if(type == "KEYBOARD"){
+         res = this.$t('KEYBOARD')
+      }
+      else if(type == "INTERFACES"){
+         res = this.$t('INTERFACES')
+      }
+      else if(type == "SO"){
+         res = this.$t('SO')
+      }
+      return res;
     }
  }, 
 }
@@ -217,5 +341,11 @@ padding-bottom: 50px !important;
 .scoresEditBox{
     margin-bottom: 20px;
 }
-
+.EditButton{
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+.SpecificationEditInput{
+   background: lightblue;
+}
 </style>

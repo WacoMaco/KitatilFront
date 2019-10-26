@@ -5,8 +5,9 @@
         <span>Cargar desde la API</span>  
       </router-link> 
          
- 
+   <router-link :to="{name: 'AdminTools.create'}">   
         <span>Cargar manualmente</span>  
+    </router-link>
       
     <router-link :to="{name: 'AdminTools.scores'}">   
         <span>Puntuar Especificaciones</span>  

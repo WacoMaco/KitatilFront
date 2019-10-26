@@ -10,6 +10,7 @@ import TermsAndConditions from "../terms_and_conditions/App";
 import AdminTools from '@/components/Admin/AdminTools.vue'
 import ApiBackup from '@/components/Admin/ApiBackup.vue'
 import SpecificationScore from '@/components/Specifications/SpecificationEdit.vue'
+import CreateLaptop from '@/components/Laptop/CreateLaptop.vue'
 
 
 Vue.use(Router)
@@ -35,6 +36,10 @@ export default new Router({
                 path:'specifications',
                 component:SpecificationScore,
                 name:'AdminTools.scores',
+            }, {
+                path: 'CreateLaptop',
+                component:CreateLaptop,
+                name: 'AdminTools.create',
             }
           ]},
     ],

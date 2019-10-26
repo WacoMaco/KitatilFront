@@ -1,8 +1,8 @@
 <template>
 <div id='app' class="container">
 
-<div v-id="isAdmin">
- <router-link class="btn btn-success" :to="{name: 'LaptopEdit', params:{laptopId : laptop.id}}"> Editar </router-link>
+<div class="EditButton" v-id="isAdmin">
+ <router-link class="btn btn-success" :to="{name: 'LaptopEdit', params:{laptopId : laptop.id}}"> {{this.$t('edit')}} </router-link>
 </div>
 
 <h2> {{laptop.name}}</h2>
@@ -13,8 +13,9 @@
 <img id="LaptopImagTag" alt="No image" :src="this.laptop.image_url"/>
 </div>
 <div id="ki" class ='col-2'>
-     <div id="LaptopInfo" class="btn btn-primary"><img class="logo" alt="Kimovil Logo" src="../assets/logo.png"/> {{laptop.ki}} </div>
-</div>
+          <div v-if="laptop.ki > 4" id="LaptopInfo" class="btn btn-primary"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div>
+          <div v-if="laptop.ki < 4 && laptop.ki > 3" id="LaptopInfo" class="btn btn-warning"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div>
+          <div v-if="laptop.ki < 2.5" id="LaptopInfo" class="btn btn-danger"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div></div>
 <div id ='Score Graphic justify-content-center' class="col">
     <Chart/>
 </div>
@@ -87,6 +88,10 @@ export default {
 <style scoped>
 #ki{
     margin:auto;
+}
+.EditButton{
+    margin-top:10px;
+    margin-bottom: 10px;
 }
 
 

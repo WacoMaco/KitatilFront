@@ -31,6 +31,7 @@
     "vue-cookie-accept-decline": "^5.3.1",
     "vue-cookies": "^1.5.13",
     "vue-eva-icons": "^1.1.1",
+    "vue-form-generator": "^2.3.4",
     "vue-google-charts": "^0.3.2",
     "vue-i18n": "^8.14.1",
     "vue-range-component": "^1.0.3",

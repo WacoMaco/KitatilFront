@@ -1,12 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
-import BootstrapVue from 'bootstrap-vue'
-import VueCookies from 'vue-cookies'
-import axios from 'axios'
-import i18n from '../../i18n'
+import Vue from 'vue';
+import App from './App.vue';
+import BootstrapVue from 'bootstrap-vue';
+import VueCookies from 'vue-cookies';
+import axios from 'axios';
+import i18n from '../../i18n';
 import VueRouter from 'vue-router';
-import router from '../router'
-import EvaIcons from 'vue-eva-icons'
+import router from '../router';
+import EvaIcons from 'vue-eva-icons';
+import VueFormGenerator from 'vue-form-generator'
 
 import "vue-cookie-accept-decline/dist/vue-cookie-accept-decline.css";
 import VueCookieAcceptDecline from "vue-cookie-accept-decline";
@@ -16,7 +17,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.component('vue-cookie-accept-decline', VueCookieAcceptDecline)
 
-
+Vue.use(VueFormGenerator)
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
