@@ -1,7 +1,6 @@
 import Vue    from 'vue'
 import Router from 'vue-router'
 
-import HelloWorld    from '@/components/HelloWorld'
 import LaptopView from "@/components/LaptopView.vue";
 import LaptopEdit from "@/components/Laptop/LaptopEdit.vue";
 import Home    from '@/components/LaptopsList'
@@ -18,7 +17,6 @@ Vue.use(Router)
 
 export default new Router({
     routes: [
-        {path: '/helloworld', name:'HelloWorld', component: HelloWorld},
         {path: '/terms_and_conditions', name:'TermsAndConditions', component: TermsAndConditions},
         {path: '/home', name:'Home', component: Home},
         {path: '/register', name:'Register', component: Register},

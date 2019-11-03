@@ -48,7 +48,6 @@
 <script>
 import Vue from 'vue'
 import Footer from "./Footer.vue";
-import Advertisement from "./Advertisement.vue";
 import Laptop from "./Laptop/LaptopView.vue";
 import Menu from "./Menu.vue";
 
