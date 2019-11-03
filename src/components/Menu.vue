@@ -1,6 +1,6 @@
 <template>
    
-     <Push disableOutsideClick>
+     <Push noOverlay disableOutsideClick>
       <a class="row justify-content-center" id="home" href="#" > 
         <span class="filaMenu" v-if= "ki === 'KiDescendente'" @click='OrdenaKi()'>Ordenar por Ki <eva-icon name="arrow-circle-down"> </eva-icon></span>  
         <span class="filaMenu" v-else @click='OrdenaKi()'>Ordenar por Ki <eva-icon name="arrow-circle-up"></eva-icon></span>  
@@ -38,7 +38,7 @@ export default {
      data(){
   return {
       price :'',
-      ki : 'KiAscendente',
+      ki : 'KiDescendente',
       news : 'Novedades',
       filter: '',
       laptops:[],

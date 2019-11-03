@@ -33,7 +33,6 @@ export default {
         password: ""
       },
       showForm: true,
-      showNavbar: true
     };
   },
   mounted: function() {
@@ -64,16 +63,14 @@ export default {
           this.$cookies.set("token", result.data.token);
           //this.$router.replace({path:'/helloworld'})
           this.showForm = false;
-          this.showNavbar = false;
           let token = `JWT ${this.$cookies.get("token")}`;
           this.$http
             .get("http://localhost:8000/api/whoami", {
               headers: { Authorization: token }
             })
             .then(result => {
+            
               this.$cookies.set("user_type", result.data.user_type);
-              this.$cookies.set("ads", result.data.ads);
-              this.showNavbar = true;
               window.location.href = "/";
             });
         })

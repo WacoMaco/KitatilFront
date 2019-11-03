@@ -91,7 +91,7 @@
   "upgrade_to_PRO": "Actualiza a plan PRO",
   "user_plan_nmonths": "¿Cuántos meses quieres pagar?",
   "user_plan_nmonths_placeholder": "Número de meses",
-  "send": "Enviar",
+
   "user_plan_payment_success": "Payment received successfully",
   "user_plan_payment_cancel": "Payment was not received",
   "username": "Nombre de usuario",
@@ -318,5 +318,10 @@
   "Name" : "Descripción",
   "Score": "Puntuación",
   "edit": "Editar",
-  "StopEdit": "Parar de editar"
+  "StopEdit": "Parar de editar",
+  "CreateUser" : "Crear usuario",
+  "send": "Enviar",
+  "Average_Ratings": "Media de los usuarios",
+  "MATERIAL": "Material",
+  "MAX_RAM": "Ram máxima"
 }

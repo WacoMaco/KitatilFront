@@ -1,7 +1,7 @@
 <template>
 <div id='app' class="container">
 
-<div class="EditButton" v-id="isAdmin">
+<div class="EditButton" v-if="isAdmin">
  <router-link class="btn btn-success" :to="{name: 'LaptopEdit', params:{laptopId : laptop.id}}"> {{this.$t('edit')}} </router-link>
 </div>
 
@@ -17,10 +17,24 @@
           <div v-if="laptop.ki < 4 && laptop.ki > 3" id="LaptopInfo" class="btn btn-warning"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div>
           <div v-if="laptop.ki < 2.5" id="LaptopInfo" class="btn btn-danger"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div></div>
 <div id ='Score Graphic justify-content-center' class="col">
-    <Chart/>
+    <Chart :performanceScore = 'laptop.performanceScore' :batteryScore = 'laptop.batteryScore' :otherScore = 'laptop.otherScore' :displayScore = 'laptop.displayScore'/>
 </div>
 
 </div>
+
+<div class= 'row'>
+
+<div class = 'col'>
+<star-rating  v-if= 'this.getCookie("token") && !isAdmin' :increment='0.5' @rating-selected= 'SaveRating' :read-only= 'rated' v-model="rating"></star-rating>
+</div>
+
+
+<div id='Average' class = 'col'>
+{{this.$t('Average_Ratings')}}: <strong class='AverageNumber'> {{ratingAverage}} </strong>
+</div>
+
+</div>
+
 
 <div class ='row'>
 
@@ -36,6 +50,19 @@
 
 
 </div>
+
+
+
+<Comment :comments ='comments'/>
+
+<div v-if= 'this.getCookie("token") && !isAdmin' class='row'>
+
+<textarea v-model='newComment' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+<button class="btn btn-success" v-on:click="SendComment">{{this.$t('send')}}</button>
+
+</div>
+
 </div>
 </template>
 
@@ -44,12 +71,16 @@
 import Specificationlist from "./Specifications/Specificationlist.vue";
 import OfferList from "./Offers/OffersList.vue";
 import Chart from "./Laptop/Chart.vue"
+import Comment from "./Comment/Comment.vue"
+import StarRating from 'vue-star-rating'
 
 export default {
     components: {
         Specificationlist,
         OfferList,
-        Chart
+        Chart,
+        Comment,
+        StarRating
   },
     props:['laptopId'],
     data(){
@@ -57,19 +88,35 @@ export default {
             id: '',
             laptop : [],
             specifications: [],
+            comments: [],
             offers:[],
             isAdmin: false,
+            newComment: '',
+            rating: 0,
+            rated: false,
+            userRating: 0,
+            ratingAverage: 0,
         }
 
         
     },
 
  mounted: function() {
-
-    this.$http.get('http://localhost:8000/api/laptopView?laptopId='+ this.$route.params.laptopId).then((result) => {
+    if(this.getCookie("token")){
+    var token = "JWT " + this.$cookies.get("token");
+    } else{
+        var token =''
+    }
+    this.$http.get('http://localhost:8000/api/laptopView?laptopId='+ this.$route.params.laptopId,{
+          headers: { Authorization: token }
+        }).then((result) => {
             this.laptop = result.data.Laptop
             this.specifications = result.data.Specifications
             this.offers = result.data.Offers
+            this.comments = result.data.Comments
+            this.rated = result.data.Rating.Rated
+            this.rating = result.data.Rating.Rating
+            this.ratingAverage = result.data.Rating.Average.score__avg
         })
     if (this.getCookie("user_type") == "admin") {
       this.isAdmin = true;
@@ -80,6 +127,36 @@ export default {
      getCookie: function(name) {
       var v = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
       return v ? v[2] : null;
+    },
+    SendComment(){
+         const formData = new FormData();
+        var token = "JWT " + this.$cookies.get("token");
+        formData.append("laptopId", this.laptop.id);
+        formData.append("text", this.newComment);
+        this.$http
+      .post("http://localhost:8000/api/createComment",formData,{
+          headers: { Authorization: token }
+        }).then(result => { 
+            this.$router.go()
+
+        });
+
+    },
+
+        SaveRating(){
+         this.rated = true
+        const formData = new FormData();
+        var token = "JWT " + this.$cookies.get("token");
+        formData.append("laptopId", this.laptop.id);
+        formData.append("score", this.rating);
+        this.$http
+      .post("http://localhost:8000/api/createRating",formData,{
+          headers: { Authorization: token }
+        }).then(result => { 
+            this.$router.go()
+
+        });
+
     },
  }
 }
@@ -93,6 +170,13 @@ export default {
     margin-top:10px;
     margin-bottom: 10px;
 }
+#Average{
+    margin:auto;
+}
 
+.AverageNumber{
+    margin:auto;
+    font-size: 30px;
+}
 
 </style>

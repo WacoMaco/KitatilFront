@@ -14,8 +14,9 @@ export default {
       el: '#chart',
       components: {
         apexchart: ApexCharts,
-      },
+      }, props:['performanceScore','batteryScore','otherScore','displayScore'],
       data: {
+        chart:'',
 
       },mounted: function(){
         var options = {
@@ -26,7 +27,7 @@ export default {
         },
         series: [{
           name: 'Score',
-          data: [4,3,5,1]
+          data: ['0','0','0','0']
         }],
         fill: {
           opacity: 0.7,
@@ -70,7 +71,18 @@ export default {
       }
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
-      }
+        this.chart = chart;
+      },watch:{
+        performanceScore(val){
+          var chart = this.chart;
+          chart.updateSeries([{
+  data: [this.performanceScore, this.batteryScore, this.otherScore, this.displayScore] }]) 
+
+
+
+          
+        },
+      },
 
     }
 

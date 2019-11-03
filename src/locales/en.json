@@ -91,7 +91,7 @@
   "upgrade_to_PRO": "Upgrade to PRO plan",
   "user_plan_nmonths": "How many months do you want to pay?",
   "user_plan_nmonths_placeholder": "Number of months",
-  "send": "Send",
+
   "user_plan_payment_success": "Payment received successfully",
   "user_plan_payment_cancel": "Payment was not received",
   "username": "Username",
@@ -164,7 +164,7 @@
   "Comments": "Comments",
   "Reviews_of_companies": "Ranking of companies",
   "Reviews_of_datascientists": "Ranking of datascientists",
-  "Average": "Average",
+
   "Company": "Company",
   "DataScientist": "DataScientist",
   "LastReview": "Last Review",
@@ -318,7 +318,12 @@
   "Name" : "Description",
   "Score": "Score",
   "edit": "Edit",
-  "StopEdit": "Stop Edit"
+  "StopEdit": "Stop Edit",
+  "CreateUser" : "Create user",
+  "send": "Send",
+  "Average_Ratings": "Average rating from users",
+  "MATERIAL": "Material",
+  "MAX_RAM": "Max ram"
 
 
 }

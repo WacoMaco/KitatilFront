@@ -2,7 +2,7 @@
 <div id='app' class="container">
 
 
-<div class="EditButton" v-id="isAdmin">
+<div class="EditButton" v-if="isAdmin">
  <router-link class="btn btn-primary" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> {{this.$t('StopEdit')}} </router-link>
 </div>
 
@@ -18,7 +18,7 @@
      <div id="LaptopInfo" class="btn btn-primary"><img class="logo" alt="Kimovil Logo" src="../../assets/logo.png"/> {{laptop.ki}} </div>
 </div>
 <div id ='Score Graphic justify-content-center' class="col">
-    <Chart/>
+    <Chart :performanceScore = 'laptop.performanceScore' :batteryScore = 'laptop.batteryScore' :otherScore = 'laptop.otherScore' :displayScore = 'laptop.displayScore'/>
 </div>
 
 </div>
@@ -42,9 +42,7 @@
 </div>
 </div>
 
-<div class="row justify-content-center">
-<div v-on:click="SaveConfirm" class="btn btn-primary"> Guardar </div>
-</div>
+
 
 <div class ='row'>
 
@@ -59,8 +57,8 @@
 <tbody>
 <tr id='SpecificationsLaptop'  v-bind:key="specification.id" v-for="specification in specifications"> 
       <td >{{changetype(specification.type)}}</td>
-      <td class="NameCol"> <input class ="SpecificationEditInput" v-model="specification.name" ></td>
-      <td v-if="filter(specification.type)"><vue-slider class="slider" @drag-end="saveSpecification(specification.id,specification.score)" :marks="marks" :tooltip-formatter="formatter" :enable-cross="false" :min='0' :max='5' :adsorb="true" :interval="0.1"  v-model="specification.score" > 
+      <td class="NameCol"> <input v-on:keyup = "EditSpecification(specification.id,specification.name)" class ="SpecificationEditInput" v-model="specification.name" ></td>
+      <td v-if="filter(specification.type)"><vue-slider class="slider" @drag-end="saveSpecification(specification.id,specification.score)" :marks="marks" :enable-cross="false" :min='0' :max='5' :adsorb="true" :interval="0.1"  v-model="specification.score" > 
   </vue-slider>
 
 
@@ -71,6 +69,10 @@
 </tbody> 
 </table>
 
+
+
+
+
 <div id ="Offers" class='.col-sm-'>
 <OfferList :offers = "offers"/>
 </div>
@@ -78,7 +80,20 @@
 
 
 
+
 </div>
+
+<div v-bind:key="specification" v-for="(specification,index) in specificationsToAdd">
+<SpecificationForm :saved= "saved" :index= 'index' @Errors = "AppendErrors"  :laptop= "laptop" class='col-9'/>  
+<eva-icon id="DeleteItem" v-on:click='DeleteSpecification(index)' class='col' name="close"></eva-icon>
+</div>
+<button class="btn btn-primary" @click="addSpecification">Add Specification</button>
+
+
+<div class="row justify-content-center">
+<button  :disabled="ValidateForms" v-on:click="SaveConfirm" class="btn btn-primary"> Guardar </button>
+</div>
+
 </div>
 </template>
 
@@ -89,18 +104,21 @@ import OfferList from "../Offers/OffersList.vue";
 import Chart from "./Chart.vue";
 import VueSlider from 'vue-slider-component';
 import 'vue-slider-component/theme/material.css';
-
+import SpecificationForm from '../Specifications/CreateSpecificationForm.vue'
+import Vue from "vue";
 export default {
     components: {
         Specificationlist,
         OfferList,
         Chart,
         VueSlider,
+        SpecificationForm
         
   },
     props:['laptopId'],
-    data(){
-        return{
+    data: function(){
+        return{   
+            saved: false,
             id: '',
             laptop : [],
             specifications: [],
@@ -117,6 +135,10 @@ export default {
         performanceScore : 0,
         otherScore : 0,
         displayScore : 0,
+        specificationsToAdd: [],
+        specificationsToEdit:{},
+         isValid : {},
+          isAdmin: false,
         }
 
         
@@ -134,17 +156,76 @@ export default {
         this.displayScore = this.laptop.displayScore
         })
 
+
+    this.$http.get('http://localhost:8000/api/laptopView?laptopId='+ this.$route.params.laptopId).then((result) => {
+            this.laptop = result.data.Laptop
+            this.specifications = result.data.Specifications
+            this.offers = result.data.Offers
+        })
+    if (this.getCookie("user_type") == "admin") {
+      this.isAdmin = true;
+    }
  
 
- }, methods:{
+ }, computed:{
+      ValidateForms(){
+          var res = false;
+          for (var key in this.isValid){
+            if (this.isValid[key] == false){
+                res = true;
+            }
+          }
+          return res;
+      }
+ },  methods:{
      SaveConfirm(){
-      this.$bvModal.msgBoxConfirm('¿Quieres guardar las scores?')
+      this.$bvModal.msgBoxConfirm('¿Quieres guardar las especificationes?')
           .then(value => {
             if(value == true){
+                this.saved = true;
                 this.SaveScore();
+                this.SaveSpecificationsEdit();
+                
+                
             }
           })
+     }, EditSpecification(id,name){
+        this.specificationsToEdit[id] = name;
      },
+     SaveSpecificationsEdit(){
+        for (var id in this.specificationsToEdit){
+        const formData = new FormData();
+        var token = "JWT " + this.$cookies.get("token");
+        formData.append("specificationId", id);
+        formData.append("name", this.specificationsToEdit[id]);
+        this.$http
+      .post("http://localhost:8000/api/editSpecification",formData,{
+          headers: { Authorization: token }
+        })
+        }
+        
+     },
+      AppendErrors(errors){
+         console.log(errors)
+          this.isValid = Object.assign({}, this.isValid,errors);
+         console.log(this.isValid)
+      },
+   getCookie: function(name) {
+      var v = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+      return v ? v[2] : null;
+    },
+
+   DeleteSpecification(index){
+              delete this.isValid["Specification" + index];
+              this.specificationsToAdd.splice(index,1)
+
+      },
+   addSpecification() {
+        var specification = Vue.extend(SpecificationForm)
+        var instance = new specification()
+        this.specificationsToAdd.push(instance.$mount()) // pass nothing
+
+      },
      SaveScore(){
         const formData = new FormData();
         var token = "JWT " + this.$cookies.get("token");
@@ -157,9 +238,9 @@ export default {
       .post("http://localhost:8000/api/saveScores",formData,{
           headers: { Authorization: token }
         }).then(result => {
-        this.$bvModal.msgBoxOk('Scores guardados',  {
-                    okTitle:'Aceptar'
-                  });
+          this.$bvModal.msgBoxOk('Saved',  {
+            okTitle:'Ok'
+          }).then(value => { if(value){this.$router.go()}});
         });
      },
      keyboard(event){
@@ -182,9 +263,7 @@ export default {
         });
     }, filter(type){
         var res = false
-        console.log(type)
-        if(type == 'CPU' || type == 'GPU' || type == 'STORAGE' || type == 'CPU_MAX' || type == 'BATERY_DURATION' || 
-        type == 'CACHE' || type == 'RAM' || type == 'CAMERA' || type == 'MEMORY_CARDS' || type == 'DISPLAY_RESOLUTION' 
+        if(type == 'CPU' || type == 'GPU' || type == 'STORAGE'  || type == 'BATERY_DURATION' || type == 'RAM' || type == 'CAMERA' || type == 'MEMORY_CARDS' || type == 'DISPLAY_RESOLUTION' 
         || type == 'DISPLAY' || type == 'WIRELESS' || type == 'STORAGE2' || type == 'RAM_VELOCITY' || type == 'SOFTWARE' || type == 'INTERFACES'){
             res =  true
         }
@@ -311,6 +390,12 @@ export default {
       }
       else if(type == "SO"){
          res = this.$t('SO')
+      }
+      else if(type == "MATERIAL"){
+         res = this.$t('MATERIAL')
+      }
+      else if(type == "MAX_RAM"){
+         res = this.$t('MAX_RAM')
       }
       return res;
     }

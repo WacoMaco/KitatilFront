@@ -132,9 +132,6 @@ export default {
       else if(type == "BATERY_DURATION"){
          res = this.$t('BATERY_DURATION')
       }
-      else if(type == "BATERY_DURATION"){
-         res = this.$t('BATERY_DURATION')
-      }
       else if(type == "BRAND"){
          res = this.$t('BRAND')
       }
@@ -179,6 +176,12 @@ export default {
       }
       else if(type == "SO"){
          res = this.$t('SO')
+      }
+      else if(type == "MATERIAL"){
+         res = this.$t('MATERIAL')
+      }
+      else if(type == "MAX_RAM"){
+         res = this.$t('MAX_RAM')
       }
       return res;
     }

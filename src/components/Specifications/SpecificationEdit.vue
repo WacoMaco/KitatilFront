@@ -41,7 +41,7 @@ export default {
     },
     data(){
         return{
-            options: ["CPU","GPU"],
+            options: ["CPU","GPU","RAM","STORAGE","DISPLAY","WIRELESS", "RAM_VELOCITY", 'INTERFACES'],
             selected: "CPU",
             specifications: [],
             specificationSelected:'',

@@ -1,6 +1,6 @@
 <template>
     <div id ='OfferForm'>
- <vue-form-generator :schema="schema" :model="model" :options="formOptions"></vue-form-generator>
+ <vue-form-generator @validated="onValidated" :schema="schema" :model="model" :options="formOptions"></vue-form-generator>
     </div>
 
 </template>
@@ -10,20 +10,48 @@
  import VueFormGenerator from "vue-form-generator";
 import "vue-form-generator/dist/vfg.css";
 export default {
+  name: 'OfferForm',
   components: {
         "vue-form-generator": VueFormGenerator.component,
-  },
+  }, props: ['laptop', 'index'],
+  watch:{
+       laptop: function(val){
+         var id = val.id;
+        console.log('Watch antes' + val.id)
+         if(id =! null && id != ''){
+          console.log('Watch dentro' + val.id)
+          this.saveOffer()
+         }
+       }
+     },
+       methods: {
+        onValidated(isValid, errors) {
+            var string = 'Offer' + this.index;
+            var dict = {};
+            dict[string] = isValid;
+            this.$emit('Errors',dict)
+
+  }, saveOffer(){
+      const formData = new FormData();
+        var token = "JWT " + this.$cookies.get("token");
+        formData.append("laptopId", this.laptop.id);
+        formData.append("price", this.model.price);
+        formData.append("shippingCost", this.model.shippingCost);
+        formData.append("shop", this.model.shop);
+        formData.append("url", this.model.url);
+        this.$http
+      .post("http://localhost:8000/api/saveOffer",formData,{
+          headers: { Authorization: token }
+        })
+  }
+     },
      data () {
     return {
       model: {
-        name: '',
-        price: 0,
-        shippingCost: 0,
-        displayScore: 0,
-        performanceScore: 0,
-        otherScore: 0,
-        image:'',
+        price: '',
+        shippingCost: '',
         shop:'',
+        url: '',
       },
        schema: {
         groups:[
@@ -36,16 +64,30 @@ export default {
                 label: 'Price',
                 model: 'price',
                 required: true,
+                validator: VueFormGenerator.validators.number,
+                min: 0,
+                },                {
+                type: 'input',
+                inputType: 'url',
+                label: 'URL',
+                model: 'url',
+                required: true,
+                validator: VueFormGenerator.validators.url,
                 },{
                 type: 'input',
                 inputType: 'number',
                 label: 'Shipping cost',
                 model: 'shippingCost',
+                required: true,
+                min: 0,
+                validator: VueFormGenerator.validators.number,
                 },{
                 type: 'input',
                 inputType: 'text',
                 label: 'Shop',
                 model: 'shop',
+                required: true,
+                validator: VueFormGenerator.validators.required,
                 },
  
                 ]

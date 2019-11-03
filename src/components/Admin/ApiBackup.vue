@@ -3,12 +3,12 @@
 
 
 <div id='content' class='row justify-content-center'>
-<button v-if="!loading" type="button" @click='LoadApi' class="btn btn-success">Cargar desde la API</button>
-<button v-if="!loading" type="button" @click='LoadBackup' class="btn btn-secondary">Cargar backup</button>
-<div v-if="loading" class="sk-rotating-plane"></div>
+<button v-if="!loading && !loading2" type="button" @click='LoadApi' class="btn btn-success">Cargar desde la API</button>
+<button v-if="!loading && !loading2" type="button" @click='LoadBackup' class="btn btn-secondary">Cargar backup</button>
+<div v-if="loading || loading2" class="sk-rotating-plane"></div>
 </div>
-<div v-if="loading" class='row justify-content-center'> Esto podría tardar unos minutos </div>
-<div v-if="!loading && laptops != null && !laptops.length == 0" class='row justify-content-center'> <h2> Laptops cargados: </h2> </div>
+<div v-if="loading || loading2" class='row justify-content-center'> Esto podría tardar unos minutos </div>
+<div v-if="!loading && !loading2 && laptops != null && !laptops.length == 0" class='row justify-content-center'> <h2> Laptops cargados: </h2> </div>
 
        <div class="laptopBox container" >
        <div class="laptop" v-bind:key="laptop.id" v-for="(laptop, index) in laptops">
@@ -37,6 +37,7 @@ export default {
   return {
       laptops: [],
       loading: false,
+      loading2: false,
       wait: '',
 
   }
@@ -48,22 +49,26 @@ export default {
   },  methods: {
       LoadApi(){
           this.loading = true;
+          this.loading2 = true;
           let token = `JWT ${this.$cookies.get("token")}`;
            this.$http
             .get("http://localhost:8000/api/findLaptops", {
               headers: { Authorization: token }
             }).then(result => {
-              alert(result.data)
-              this.wait = result.data;
-            });
+              this.loading = false;
+              this.wait = result.data.message;
+              if(this.wait == 'Finalizada carga'){
              this.$http
             .get("http://localhost:8000/api/loadBackup", {
               headers: { Authorization: token }
             })
             .then(result => {
               this.laptops = result.data;
-              this.loading = false;
+              this.loading2 = false;
             });
+          }
+            });
+
             
             
 
@@ -72,6 +77,7 @@ export default {
 
 LoadBackup(){
           this.loading = true;
+          this.loading2 = true;
           let token = `JWT ${this.$cookies.get("token")}`;
              this.$http
             .get("http://localhost:8000/api/loadBackup", {
@@ -79,6 +85,7 @@ LoadBackup(){
             })
             .then(result => {
               this.loading = false;
+              this.loading2 = false;
               if(result.data != null){
               this.laptops = result.data;
               }

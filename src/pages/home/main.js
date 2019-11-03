@@ -7,7 +7,9 @@ import i18n from '../../i18n';
 import VueRouter from 'vue-router';
 import router from '../router';
 import EvaIcons from 'vue-eva-icons';
-import VueFormGenerator from 'vue-form-generator'
+import VueFormGenerator from 'vue-form-generator';
+
+
 
 import "vue-cookie-accept-decline/dist/vue-cookie-accept-decline.css";
 import VueCookieAcceptDecline from "vue-cookie-accept-decline";

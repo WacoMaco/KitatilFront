@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    <Navbar/>
+  <div id="register">
 
     <br>
 
@@ -44,13 +43,6 @@
     </b-modal>
 
     <b-form id="register" @submit="createUser">
-      <label for="type">{{$t('account_type')}}</label>
-      <br>
-      <select v-model="selected">
-        <option>DataScientist</option>
-        <option>Company</option>
-      </select>
-      <br>
       <label for="username">{{$t('username')}}</label>
       <b-input
         type="text"
@@ -110,7 +102,7 @@
       <b-form-text id="nameHelpBlock">{{$t('write_name')}}</b-form-text>
       <br>
 
-      <div id="surname" v-if="selected ==='DataScientist'">
+      <div id="surname">
         <label for="surname">{{$t('surname')}}</label>
         <b-input
           type="text"
@@ -124,7 +116,7 @@
         <br>
       </div>
 
-      <div id="photo" v-if="selected ==='DataScientist'">
+      <div id="photo">
         <label for="photo">{{$t('photo')}}</label>
         <b-input
           type="url"
@@ -135,88 +127,6 @@
           :maxlength="80"
         />
         <b-form-text id="photoHelpBlock">{{$t('photo_help')}}</b-form-text>
-        <br>
-      </div>
-
-      <label for="email">{{$t('email')}}</label>
-      <b-input
-        type="email"
-        id="text"
-        v-model="form.email"
-        aria-describedby="emailHelpBlock"
-        :state="form.email.length > 0 && new RegExp(/\S+@gmail+\.\S+|\S+@hotmail+\.\S+/).test(this.form.email)"
-        :maxlength="80"
-      />
-      <b-form-text id="emailHelpBlock">{{$t('write_email')}}</b-form-text>
-      <br>
-
-      <div id="address" v-if="selected ==='DataScientist'">
-        <label for="address">{{$t('address')}}</label>
-        <b-input
-          type="text"
-          id="text"
-          v-model="form.address"
-          aria-describedby="addressHelpBlock"
-          :state="form.address.length > 0"
-          :maxlength="80"
-        />
-        <b-form-text id="addressHelpBlock">{{$t('write_address')}}</b-form-text>
-        <br>
-      </div>
-
-      <div id="phone" v-if="selected ==='DataScientist'">
-        <label for="phone">{{$t('phone')}}</label>
-        <b-input
-          type="text"
-          id="text"
-          v-model="form.phone"
-          aria-describedby="phoneHelpBlock"
-          :state="form.phone.length > 0 && new RegExp(/\d{9}/).test(this.form.phone)"
-          :maxlength="9"
-        />
-        <b-form-text id="phoneHelpBlock">{{$t('write_phone')}}</b-form-text>
-        <br>
-      </div>
-
-      <div id="description" v-if="selected ==='Company'">
-        <label for="description">{{$t('description')}}</label>
-        <b-form-textarea
-          type="text"
-          id="text"
-          v-model="form.description"
-          aria-describedby="descriptionHelpBlock"
-          :state="form.description.length > 0"
-          :maxlength="80"
-        />
-        <b-form-text id="descriptionHelpBlock">{{$t('description_help_company')}}</b-form-text>
-        <br>
-      </div>
-
-      <div id="nif" v-if="selected ==='Company'">
-        <label for="nif">{{$t('nif')}}</label>
-        <b-input
-          type="text"
-          id="text"
-          v-model="form.nif"
-          aria-describedby="nifHelpBlock"
-          :state="form.nif.length > 0"
-          :maxlength="9"
-        />
-        <b-form-text id="nifHelpBlock">{{$t('write_nif')}}</b-form-text>
-        <br>
-      </div>
-
-      <div id="logo" v-if="selected ==='Company'">
-        <label for="logo">{{$t('logo_url')}}</label>
-        <b-input
-          type="url"
-          id="text"
-          v-model="form.logo"
-          aria-describedby="logoHelpBlock"
-          :state="form.logo.length > 0 && new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi).test(this.form.logo)"
-          :maxlength="80"
-        />
-        <b-form-text id="logoHelpBlock">{{$t('logo_url_help')}}</b-form-text>
         <br>
       </div>
 
@@ -232,19 +142,10 @@
 
       <b-button
         type="submit"
-        class="mt-2"
         variant="success"
         block
         @click.stop.prevent="createUser()"
-        v-if="selected ==='Company'"
-      >{{$t('create_company')}}:</b-button>
-      <b-button
-        type="submit"
-        variant="success"
-        block
-        @click.stop.prevent="createUser()"
-        v-if="selected ==='DataScientist'"
-      >{{$t('create_ds')}}</b-button>
+      >{{$t('CreateUser')}}</b-button>
       <br>
       <br>
     </b-form>
@@ -253,14 +154,10 @@
 </template>
 
 <script>
-import Navbar from "../../components/Navbar.vue";
-import Footer from "../../components/Footer.vue";
 
 export default {
   name: "app",
   components: {
-    Navbar,
-    Footer
   },
   computed: {},
   data() {
@@ -273,16 +170,10 @@ export default {
         surname: "",
         phone: "",
         address: "",
-        email: "",
         photo: "",
-        surname: "",
-        logo: "",
-        description: "",
-        nif: "",
         confirmPassword: "",
         confirmTerms: "not_accepted"
       },
-      selected: "DataScientist",
       messages: [],
       modalShow: "false",
       user_type: this.$cookies.get("user_type"),
@@ -302,7 +193,7 @@ export default {
 
     var token = "JWT " + this.$cookies.get("token");
     this.$http
-      .get("https://api5-datame.herokuapp.com/api/v1/offer", {
+      .get("http://localhost:8000/api/offer", {
         headers: { Authorization: token }
       })
       .then(result => {
@@ -335,32 +226,15 @@ export default {
       if (this.form.name.length == 0) {
         this.messages.push(this.$t("name_error"));
       }
-      if (this.selected == "DataScientist" && this.form.surname.length == 0) {
+      if (this.form.surname.length == 0) {
         this.messages.push(this.$t("surname_error"));
       }
 
-      if (this.selected == "DataScientist" && this.form.email.length == 0) {
-        this.messages.push(this.$t("email_error"));
-      }
-
-      if (this.selected == "DataScientist" && this.form.address.length == 0) {
-        this.messages.push(this.$t("address_error"));
-      }
-      if (this.selected == "Company" && this.form.nif.length == 0) {
-        this.messages.push(this.$t("nif_error"));
-      }
       var regex = new RegExp(
         /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
       );
-      if (this.selected == "DataScientist" && !this.form.photo.match(regex)) {
+      if (!this.form.photo.match(regex)) {
         this.messages.push(this.$t("photo_error"));
-      }
-
-      if (this.selected == "Company" && this.form.description.length == 0) {
-        this.messages.push(this.$t("description_error"));
-      }
-      if (this.selected == "Company" && !this.form.logo.match(regex)) {
-        this.messages.push(this.$t("logo_error"));
       }
       if (this.form.confirmTerms == "not_accepted") {
         this.messages.push(this.$t("terms_error"));
@@ -368,22 +242,10 @@ export default {
       if (this.messages.length > 0) {
         this.modalShow = true;
       } else {
-        if (this.selected == "Company") {
-          formData.append("type", "C");
-          formData.append("nif", this.form.nif);
-          formData.append("logo", this.form.logo);
-          formData.append("email", this.form.email);
-          formData.append("description", this.form.description);
-        } else {
-          formData.append("type", "DS");
           formData.append("surname", this.form.surname);
-          formData.append("phone", this.form.phone);
-          formData.append("address", this.form.address);
-          formData.append("email", this.form.email);
           formData.append("photo", this.form.photo);
-        }
         this.$http
-          .post("https://api5-datame.herokuapp.com/api/v1/register", formData)
+          .post("http://localhost:8000/api/register", formData)
           .then(result => {
             this.registerMessage = this.$t('success_register')
             this.registered = true;
@@ -395,14 +257,14 @@ export default {
       formLogin.append("username", this.form.username);
       formLogin.append("password", this.form.password);
 
-      const baseURI = "https://api5-datame.herokuapp.com/api/v1/login";
+      const baseURI = "http://localhost:8000/api/login";
       this.$http
-        .post("https://api5-datame.herokuapp.com/api/v1/login", formLogin)
+        .post("http://localhost:8000/api/login", formLogin)
         .then(result => {
           this.$cookies.set("token", result.data.token);
           let token = `JWT ${this.$cookies.get("token")}`;
           this.$http
-            .get("https://api5-datame.herokuapp.com/api/v1/whoami", {
+            .get("http://localhost:8000/api/whoami", {
               headers: { Authorization: token }
             })
             .then(result => {

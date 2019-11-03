@@ -35,7 +35,7 @@
          <router-link :to="{name:'Login'}" class="btn btn-primary" tag ="button" v-show="!isLoggedIn">{{ $t('login') }}</router-link>
           </b-nav-form>
           <b-nav-form class="buttons">
-          <b-button size="sm" class="my-2 my-sm-0 secondary-button" variant="outline-primary" href="/register.html" v-show="!isLoggedIn">{{ $t('signup') }}</b-button>
+        <router-link :to="{name: 'Register'}">  <b-button size="sm" class="my-2 my-sm-0 secondary-button" variant="outline-primary" v-show="!isLoggedIn">{{ $t('signup') }}</b-button> </router-link> 
           </b-nav-form>
           <!--<b-nav-item href="/login.html" v-show="!isLoggedIn"><p class="accent-button">{{ $t('login') }}</p></b-nav-item>
           <b-nav-item href="/register.html" v-show="!isLoggedIn">{{ $t('signup') }}</b-nav-item>-->
@@ -213,6 +213,9 @@ background: linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+#FinderInput{
+  border-radius: 20px;
 }
 
 
