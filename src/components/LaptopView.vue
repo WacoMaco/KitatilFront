@@ -107,7 +107,7 @@ export default {
     } else{
         var token =''
     }
-    this.$http.get('http://localhost:8000/api/laptopView?laptopId='+ this.$route.params.laptopId,{
+    this.$http.get('https://kitatil-api.herokuapp.com/api/laptopView?laptopId='+ this.$route.params.laptopId,{
           headers: { Authorization: token }
         }).then((result) => {
             this.laptop = result.data.Laptop
@@ -134,7 +134,7 @@ export default {
         formData.append("laptopId", this.laptop.id);
         formData.append("text", this.newComment);
         this.$http
-      .post("http://localhost:8000/api/createComment",formData,{
+      .post("https://kitatil-api.herokuapp.com/api/createComment",formData,{
           headers: { Authorization: token }
         }).then(result => { 
             this.$bvModal.msgBoxOk(this.$t('CommentSaved'),  {
@@ -152,7 +152,7 @@ export default {
         formData.append("laptopId", this.laptop.id);
         formData.append("score", this.rating);
         this.$http
-      .post("http://localhost:8000/api/createRating",formData,{
+      .post("https://kitatil-api.herokuapp.com/api/createRating",formData,{
           headers: { Authorization: token }
         }).then(result => { 
             this.$bvModal.msgBoxOk(this.$t('LaptopRated'),  {
