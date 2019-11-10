@@ -5,8 +5,8 @@
          <a :href="offer.url">
       <li id='offer' :class="style" > 
          <p class ='btn btn-primary'> {{offer.price}}€ </p>
-          <p> Shipping costs: {{offer.shippingCost}}€ </p>
-          <p> Shop: {{offer.shop}} </p>
+          <p> {{ $t('Shipping_cost') }}: {{offer.shippingCost}}€ </p>
+          <p> {{ $t('shop') }}: {{offer.shop}} </p>
       </li>
       </a>
 

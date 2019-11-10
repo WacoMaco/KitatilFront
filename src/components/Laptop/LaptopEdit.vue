@@ -238,7 +238,7 @@ export default {
       .post("http://localhost:8000/api/saveScores",formData,{
           headers: { Authorization: token }
         }).then(result => {
-          this.$bvModal.msgBoxOk('Saved',  {
+          this.$bvModal.msgBoxOk(this.$t('SpecSaved'),  {
             okTitle:'Ok'
           }).then(value => { if(value){this.$router.go()}});
         });
@@ -396,6 +396,12 @@ export default {
       }
       else if(type == "MAX_RAM"){
          res = this.$t('MAX_RAM')
+      }
+      else if(type == "RAM_SLOTS"){
+         res = this.$t('RAM_SLOTS')
+      }
+      else if(type == "RAM_EMPTY_SLOTS"){
+         res = this.$t('RAM_EMPTY_SLOTS')
       }
       return res;
     }

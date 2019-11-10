@@ -5,7 +5,7 @@
     <div id="page-wrap">
        <div v-if="laptops.length > 0" class="laptopBox container" >
        <div class="laptop" v-bind:key="laptop.id" v-for="(laptop, index) in laptops">
-     <router-link :to="{name: 'LaptopView', params:{laptopId : laptop.id}}" active-class='none'> 
+     <router-link id="router" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}" active-class='none'> 
         <Laptop  :laptop = laptop> </Laptop>
      </router-link>
        </div>
@@ -125,6 +125,7 @@ export default {
       window.history.back();
     },
     Ordena(filter) {
+      this.itemsCargados = false;
       this.filter = filter;
       this.laptopsLoaded = 0;
       this.laptops = [];
@@ -133,6 +134,7 @@ export default {
       this.loadMore();
     },
     precioFun(precios){
+      this.itemsCargados = false;
       this.min_price =precios[0];
       this.max_price = precios[1];
       this.fin = false;
@@ -262,5 +264,12 @@ flex-flow: wrap;
 .none{
   margin:auto;
 }
+a#router{
+  color: black;
+}
+a#router:hover{
+  color: black;
+  text-decoration: none;
+} 
 
 </style>

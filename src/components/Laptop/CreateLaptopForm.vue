@@ -32,21 +32,21 @@ export default {
           {
             type: 'input',
             inputType: 'text',
-            label: 'Name',
+            label: this.$t('name'),
             model: 'name',
             required: true,
             validator: VueFormGenerator.validators.required
           },{
             type: 'input',
             inputType: 'url',
-            label: 'Image URL',
+            label: this.$t('image_url'),
             model: 'image',
             validator: VueFormGenerator.validators.url,
           },
             {
             type: 'input',
             inputType: 'text',
-            label: 'Google Id',
+            label: this.$t('GoogleId'),
             model: 'googleId',
           }
  

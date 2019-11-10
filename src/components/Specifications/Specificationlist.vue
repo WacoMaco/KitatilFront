@@ -180,6 +180,15 @@ export default {
       else if(type == "MATERIAL"){
          res = this.$t('MATERIAL')
       }
+      else if(type == "CAMERA_RES"){
+         res = this.$t('CAMERA_RES')
+      }
+      else if(type == "RAM_SLOTS"){
+         res = this.$t('RAM_SLOTS')
+      }
+      else if(type == "RAM_EMPTY_SLOTS"){
+         res = this.$t('RAM_EMPTY_SLOTS')
+      }
       else if(type == "MAX_RAM"){
          res = this.$t('MAX_RAM')
       }

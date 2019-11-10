@@ -10,7 +10,7 @@
 <OfferForm :saveItems= 'saveItems' :index= 'index' @Errors = "AppendErrors" :laptop= "laptop" class='col-9'/>  
 <eva-icon id="DeleteItem" v-on:click='DeleteOffer(index)' class='col' name="close"></eva-icon>
 </div>
-<button class="btn btn-primary" @click="onClick">Add offer</button>
+<button class="btn btn-primary" @click="onClick">{{$t('AddOffer')}}</button>
 </div>
 
 
@@ -24,11 +24,11 @@
 </div>
 
 
-<button class="btn btn-primary" @click="addSpecification">Add Specification</button>
+<button class="btn btn-primary" @click="addSpecification">{{$t('AddSpec')}}</button>
 </div>
 </div>
 <div class ='row'>
-<button class="btn btn-success" style='margin:auto; margin-top:20px;' :disabled="ValidateForms" @click="saveAll">Save All</button>
+<button class="btn btn-success" style='margin:auto; margin-top:20px;' :disabled="ValidateForms" @click="saveAll">{{$t('Saveall')}}</button>
 </div>
 </div>
 </template>
@@ -85,7 +85,7 @@ export default {
       },
        saveAll(){
           this.saved = true
-          this.$bvModal.msgBoxOk('Saved',  {
+          this.$bvModal.msgBoxOk(this.$t('LaptopSaved'),  {
             okTitle:'Ok'
           }).then(value => { if(value){this.$router.go()}});
          

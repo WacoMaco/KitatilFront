@@ -3,12 +3,12 @@
 
 
 <div id='content' class='row justify-content-center'>
-<button v-if="!loading && !loading2" type="button" @click='LoadApi' class="btn btn-success">Cargar desde la API</button>
-<button v-if="!loading && !loading2" type="button" @click='LoadBackup' class="btn btn-secondary">Cargar backup</button>
+<button v-if="!loading && !loading2" type="button" @click='LoadApi' class="btn btn-success">{{this.$t('CARGA_API')}}</button>
+<button v-if="!loading && !loading2" type="button" @click='LoadBackup' class="btn btn-secondary">{{this.$t('CARGA_BACKUP')}}</button>
 <div v-if="loading || loading2" class="sk-rotating-plane"></div>
 </div>
-<div v-if="loading || loading2" class='row justify-content-center'> Esto podría tardar unos minutos </div>
-<div v-if="!loading && !loading2 && laptops != null && !laptops.length == 0" class='row justify-content-center'> <h2> Laptops cargados: </h2> </div>
+<div v-if="loading || loading2" class='row justify-content-center'> {{this.$t('WAIT')}} </div>
+<div v-if="!loading && !loading2 && laptops != null && !laptops.length == 0" class='row justify-content-center'> <h2> {{this.$t('LAPTOPS_LOADED')}} </h2> </div>
 
        <div class="laptopBox container" >
        <div class="laptop" v-bind:key="laptop.id" v-for="(laptop, index) in laptops">

@@ -42,7 +42,20 @@ export default {
             },
         
         
-        },plotOptions: {
+        },
+    responsive: [{
+    breakpoint: 1200,
+    options: {
+plotOptions: {
+                radar: {
+                    size: 60,
+                }
+}
+
+    },
+      }],
+        
+        plotOptions: {
                 radar: {
                     size: 110,
                    
@@ -92,6 +105,12 @@ export default {
 <style>
 apexcharts-xaxis-label{
   background:black;
+}
+
+#chart {
+  max-width: 760px;
+  margin: 35px auto;
+  opacity: 0.9;
 }
 
 
