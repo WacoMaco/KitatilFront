@@ -114,6 +114,18 @@ export default {
       margin-top: 5%;
       z-index: 1;
     }
+        @media all and (max-width: 900px) {
+  .bm-burger-button {
+      position: fixed;
+      width: 36px;
+      height: 30px;
+      left: 36px;
+      top: 200px;
+      cursor: pointer;
+      margin-top: 5%;
+      z-index: 1;
+    }
+    }
     .bm-burger-bars {
       background-color: #373a47;
     }
@@ -173,16 +185,5 @@ background: linear-gradient(180deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 7
       width:90% !important;
     }
 
-    @media all and (max-width: 900px) {
-  .bm-burger-button {
-      position: fixed;
-      width: 36px;
-      height: 30px;
-      left: 36px;
-      top: 100px;
-      cursor: pointer;
-      margin-top: 5%;
-      z-index: 1;
-    }
-    }
+
 </style>

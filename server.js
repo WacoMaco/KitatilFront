@@ -1,3 +1,4 @@
+var history = require('connect-history-api-fallback');
 let express = require('express');
 let path = require('path');
 let serveStatic = require('serve-static');
