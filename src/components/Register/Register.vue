@@ -193,7 +193,7 @@ export default {
 
     var token = "JWT " + this.$cookies.get("token");
     this.$http
-      .get("http://localhost:8000/api/offer", {
+      .get("https://kitatil-api.herokuapp.com/api/offer", {
         headers: { Authorization: token }
       })
       .then(result => {
@@ -245,7 +245,7 @@ export default {
           formData.append("surname", this.form.surname);
           formData.append("photo", this.form.photo);
         this.$http
-          .post("http://localhost:8000/api/register", formData)
+          .post("https://kitatil-api.herokuapp.com/api/register", formData)
           .then(result => {
             this.registerMessage = this.$t('success_register')
             this.registered = true;
@@ -257,14 +257,14 @@ export default {
       formLogin.append("username", this.form.username);
       formLogin.append("password", this.form.password);
 
-      const baseURI = "http://localhost:8000/api/login";
+      const baseURI = "https://kitatil-api.herokuapp.com/api/login";
       this.$http
-        .post("http://localhost:8000/api/login", formLogin)
+        .post("https://kitatil-api.herokuapp.com/api/login", formLogin)
         .then(result => {
           this.$cookies.set("token", result.data.token);
           let token = `JWT ${this.$cookies.get("token")}`;
           this.$http
-            .get("http://localhost:8000/api/whoami", {
+            .get("https://kitatil-api.herokuapp.com/api/whoami", {
               headers: { Authorization: token }
             })
             .then(result => {

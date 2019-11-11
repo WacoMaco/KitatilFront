@@ -136,7 +136,7 @@ export default {
       search(){
         if(this.finder != ''){
            this.$http
-      .get("http://localhost:8000/api/finder" + '?finder=' + this.finder).then(result => {
+      .get("https://kitatil-api.herokuapp.com/api/finder" + '?finder=' + this.finder).then(result => {
         this.laptopsFinder = result.data  
         
     })

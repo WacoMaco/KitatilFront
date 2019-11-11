@@ -52,7 +52,7 @@ export default {
       var username = this.form.username;
       var password = this.form.password;
 
-      const baseURI = "http://localhost:8000/api/login";
+      const baseURI = "https://kitatil-api.herokuapp.com/api/login";
       this.$http
         .post(baseURI, {
           username: username,
@@ -65,7 +65,7 @@ export default {
           this.showForm = false;
           let token = `JWT ${this.$cookies.get("token")}`;
           this.$http
-            .get("http://localhost:8000/api/whoami", {
+            .get("https://kitatil-api.herokuapp.com/api/whoami", {
               headers: { Authorization: token }
             })
             .then(result => {

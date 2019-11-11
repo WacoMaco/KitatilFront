@@ -69,7 +69,7 @@ formOptions: {
         formData.append("image_url", this.model.image);
         formData.append("googleId", this.model.googleId);
         this.$http
-      .post("http://localhost:8000/api/saveLaptop",formData,{
+      .post("https://kitatil-api.herokuapp.com/api/saveLaptop",formData,{
           headers: { Authorization: token }
         }).then(result => {
         this.laptop = result.data.Laptop;

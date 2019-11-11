@@ -75,7 +75,7 @@ export default {
   },
   mounted: function() {
       this.$http
-      .get("http://localhost:8000/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
+      .get("https://kitatil-api.herokuapp.com/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
        "&min_price=" + this.min_price + "&max_price=" + this.max_price).then(result => {
         this.laptops = result.data;
         this.laptopsCopy = result.data;
@@ -103,7 +103,7 @@ export default {
 
     loadMore(){
       this.$http
-      .get("http://localhost:8000/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
+      .get("https://kitatil-api.herokuapp.com/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
        "&min_price=" + this.min_price + "&max_price=" + this.max_price).then(result => {
         this.laptops = this.laptops.concat(result.data);
         this.laptopsCopy = this.laptopsCopy.concat(result.data);
@@ -145,7 +145,7 @@ export default {
     },
   Busca(finder){
    this.$http
-      .get("http://localhost:8000/api/finder" + '?finder=' + finder).then(result => {
+      .get("https://kitatil-api.herokuapp.com/api/finder" + '?finder=' + finder).then(result => {
         this.laptops = result.data  
         Vue.set(this.laptops,result.data)
     })
