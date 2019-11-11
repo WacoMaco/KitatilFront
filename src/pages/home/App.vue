@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="height: 100%;">
     <Navbar id="nav" style="z-index: 999;position:sticky"/>
-    <router-view style="min-height: 100%;margin: 0 auto -50px;" :key="$route.fullPath" class="content"/>
+    <router-view style="min-height: 100%;margin: 100px auto -50px;" :key="$route.fullPath" class="content"/>
   <Footer/>
   </div>
 </template>
