@@ -51,7 +51,7 @@
   "description_apply_feedback": "Introduce al menos 10 letras",
   "create_apply": "Crear solicitud",
   "company_logo_alt": "Logo empresa",
-  "name": "Nombre",
+  
   "logo": "Logo",
 
   "modal_edit_profile": "Editar perfil",
@@ -205,7 +205,7 @@
   "terms": "términos y condiciones",
   "upgrade_user_plan": "Mejora tu plan de usuario",
   "user_plan_nmonths_warning": "No es posible pagar con una antelación de más de 24 meses o menos de 1",
-  "price": "Precio",
+
   "price_per_month": "5 EUR al mes",
   "upgrade": "Suscribir",
   "manage_users": "Gestionar usuarios",
@@ -314,6 +314,7 @@
   "GPU_TECNOLOGY" : "Tecnología de GPU",
   "KEYBOARD_NUMERIC" : "Teclado numérico",
   "SOFTWARE" : "Software incluido",
+  "CAMERA_RES" : "Resolución de la cámara",
   "Type" : "Tipo",
   "Name" : "Descripción",
   "Score": "Puntuación",
@@ -323,5 +324,34 @@
   "send": "Enviar",
   "Average_Ratings": "Media de los usuarios",
   "MATERIAL": "Material",
-  "MAX_RAM": "Ram máxima"
+  "MAX_RAM": "Ram máxima",
+  "CARGA_API": "Cargar desde la API",
+  "CARGA_BACKUP" : "Cargar copia de seguridad",
+  "WAIT" : "Esto podría tomar unos minutos",
+  "LAPTOPS_LOADED": "Portátiles cargados",
+  "SEARCH": "Buscar por nombre",
+  "ORDENAR_KI": "Ordernar por Ki",
+  "ORDENAR_Price": "Ordenar por Precio",
+  "NEWS": "Novedades",
+  "shop": "Tienda",
+  "Shipping_cost": "Costes de envío",
+  "createLaptop": "Crear portátil",
+  "rateSpec": "Valorar especificaciones",
+  "name": "Nombre",
+  "image_url": "URl de la imagen",
+  "GoogleId": "Google Id",
+  "price": "Precio",
+  "AddOffer": "Añadir oferta",
+  "AddSpec": "Añadir especificación",
+  "Saveall": "Guardar todo",
+  "Offer": "Oferta",
+  "Spec" : "Especificación",
+  "LaptopSaved" : "Portátil guardado",
+  "SpecSaved" : "Especificación(es) guardada(s)",
+  "CommentSaved": "Comentario enviado",
+  "LaptopRated" : "Se ha puntuado el portátil",
+  "RAM_EMPTY_SLOTS" : "Huecos libres de RAM",
+  "RAM_SLOTS" : "Huecos de RAM"
+
+
 }

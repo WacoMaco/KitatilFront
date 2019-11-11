@@ -1,17 +1,17 @@
 <template>
    
-     <Push noOverlay disableOutsideClick>
+     <Push isOpen noOverlay disableOutsideClick>
       <a class="row justify-content-center" id="home" href="#" > 
-        <span class="filaMenu" v-if= "ki === 'KiDescendente'" @click='OrdenaKi()'>Ordenar por Ki <eva-icon name="arrow-circle-down"> </eva-icon></span>  
-        <span class="filaMenu" v-else @click='OrdenaKi()'>Ordenar por Ki <eva-icon name="arrow-circle-up"></eva-icon></span>  
+        <span class="filaMenu" v-if= "ki === 'KiDescendente'" @click='OrdenaKi()'>{{this.$t('ORDENAR_KI')}} <eva-icon name="arrow-circle-down"> </eva-icon></span>  
+        <span class="filaMenu" v-else @click='OrdenaKi()'>{{this.$t('ORDENAR_KI')}} <eva-icon name="arrow-circle-up"></eva-icon></span>  
       </a>
       <a class="row justify-content-center" id="home" href="#" > 
-         <span class="filaMenu" v-if= "price === 'PrecioDescendente' || price === '' " @click='OrdenaPrecio()'>Ordenar por precio <eva-icon name="arrow-circle-down"></eva-icon></span> 
-        <span class="filaMenu" v-else @click='OrdenaPrecio()'>Ordenar por precio <eva-icon name="arrow-circle-up"></eva-icon></span>  
+         <span class="filaMenu" v-if= "price === 'PrecioDescendente' || price === '' " @click='OrdenaPrecio()'>{{this.$t('ORDENAR_Price')}} <eva-icon name="arrow-circle-down"></eva-icon></span> 
+        <span class="filaMenu" v-else @click='OrdenaPrecio()'>{{this.$t('ORDENAR_Price')}} <eva-icon name="arrow-circle-up"></eva-icon></span>  
       </a>
          
      <a class="row justify-content-center" id="home" href="#" @click='Test()'> 
-        <span class="filaMenu" @click='OrdenaNovedades()'>Novedades:🆕</span>  
+        <span class="filaMenu" @click='OrdenaNovedades()'>{{this.$t('NEWS')}}:🆕</span>  
       </a>
 
 

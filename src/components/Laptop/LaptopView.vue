@@ -3,7 +3,7 @@
 
         <b-card class='laptop-bcard'>
           <div class ='row justify-content-center'>
-          <b-card-text id ='LaptopCard' class='col'> {{laptop.name}}" </b-card-text>
+          <b-card-text id ='LaptopCard' class='col name'> {{laptop.name}}" </b-card-text>
           </div>
         <div class ='row justify-content-center'>
         <img class='col-4' id="LaptopImagTag" alt="No image" :src="this.laptop.image_url"/>
@@ -15,9 +15,9 @@
         </div>
 
         <div  class ='row justify-content-center'>
-          <div v-if="laptop.ki > 4" id="LaptopInfo" class="btn btn-primary"><img class="logo" alt="Kimovil Logo" src="../../assets/logo.png"/> {{laptop.ki}} </div>
+          <div v-if="laptop.ki >= 4" id="LaptopInfo" class="btn btn-primary"><img class="logo" alt="Kimovil Logo" src="../../assets/logo.png"/> {{laptop.ki}} </div>
           <div v-if="laptop.ki < 4 && laptop.ki > 3" id="LaptopInfo" class="btn btn-warning"><img class="logo" alt="Kimovil Logo" src="../../assets/logo.png"/> {{laptop.ki}} </div>
-          <div v-if="laptop.ki < 2.5" id="LaptopInfo" class="btn btn-danger"><img class="logo" alt="Kimovil Logo" src="../../assets/logo.png"/> {{laptop.ki}} </div>
+          <div v-if="laptop.ki <= 3" id="LaptopInfo" class="btn btn-danger"><img class="logo" alt="Kimovil Logo" src="../../assets/logo.png"/> {{laptop.ki}} </div>
 
         </div>
 
@@ -43,6 +43,7 @@ export default {
 <style>
 .laptop-bcard {
   margin: 2em;
+  max-height: 300px;
 }
 #LaptopImagTag{
   max-width: 50%;
@@ -59,5 +60,13 @@ export default {
 .logo{
   height: 20px;
   width: auto;
+}
+.name{
+      display: -webkit-box;
+    -moz-line-clamp: 5;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>

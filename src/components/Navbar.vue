@@ -1,21 +1,21 @@
 <template>
   <div id="nav">
-    <b-navbar class="custom-nav" toggleable="lg">
-      <b-navbar-brand>
-        <router-link :to="{name:'Home'}"> <img id="Kimovil-logo" alt="Kimovil Logo" src="../assets/brand-name2.png"/></router-link>
+    <b-navbar id="navbartag" class="row custom-nav" toggleable="lg">
+      <b-navbar-brand id ="NavBarIcon" class="col d-flex justify-content-start">
+        <router-link id = "router" :to="{name:'Home'}"> <img id="Kimovil-logo" alt="Kimovil Logo" src="../assets/brand-name2.png"/></router-link>
       </b-navbar-brand>
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      
         
-        <div class="row justify-content-center finder">
-        <input id="FinderInput" type="text" v-model="finder" placeholder="Search title.." v-on:focus='GainFocus' v-on:keyup='search'/>
+        <div class="col finder">
+        <input id="FinderInput" class="d-flex justify-content-end" type="text" v-model="finder" placeholder="HP,MSI,ACER..." v-on:focus='GainFocus' v-on:keyup='search'/>
         <div id ='FinderBox' v-if='finder != "" && focused'>
         <div id='LaptopsFinder'  v-bind:key="laptop.id" v-for="(laptop, index) in laptopsFinder">
-       <router-link v-on:click.native="LoseFocus" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> 
+       <router-link id = "router" v-on:click.native="LoseFocus" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> 
          <div class="row FinderRow"> 
            <div class="col FinderName">
            {{laptop.name}} 
            </div>
-            <div class="col-4">
+            <div class="col">
             <img id="LaptopImagTag" alt="No image" :src="laptop.image_url"/>
           </div>
            </div> 
@@ -26,7 +26,7 @@
         </div>
 
         </div>
-
+      <b-navbar-toggle class="col-2" target="nav_collapse"></b-navbar-toggle>
       <b-collapse is-nav id="nav_collapse">
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
@@ -39,7 +39,7 @@
           </b-nav-form>
           <!--<b-nav-item href="/login.html" v-show="!isLoggedIn"><p class="accent-button">{{ $t('login') }}</p></b-nav-item>
           <b-nav-item href="/register.html" v-show="!isLoggedIn">{{ $t('signup') }}</b-nav-item>-->
-         <b-nav-item v-show="isLoggedIn && isAdmin"> <router-link :to="{name: 'AdminTools.api'}">  {{ $t('admin_tools') }} </router-link> </b-nav-item> 
+         <b-nav-item v-show="isLoggedIn && isAdmin"> <router-link id= "router2" :to="{name: 'AdminTools.api'}">  {{ $t('admin_tools') }} </router-link> </b-nav-item> 
           <b-nav-item href="#" v-show="isLoggedIn" @click="logOut">{{ $t('logout') }}</b-nav-item>
           <b-nav-item-dropdown :text="$t('lang')" v-model="$i18n.locale" right>
             <b-dropdown-item
@@ -153,6 +153,11 @@ export default {
   width: auto;
 }
 
+#navbartag{
+  margin-left: 0px;
+  
+}
+
 .custom-nav {
 background: -moz-linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75%,#f708ab 100%); 
 background: -webkit-linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75%,#f708ab 100%); 
@@ -160,6 +165,16 @@ background: linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75
   top:0px;
   position: fixed;
   width: 100%;
+}
+@media all and (max-width: 1000px) {
+  .custom-nav {
+background: -moz-linear-gradient(45deg, #381436 0%,#2f3348 25%,#ea3f95 50%,#6b213e 75%,#f708ab 100%); 
+background: -webkit-linear-gradient(45deg, #381436 0%,#2f3348 25%,#ea3f95 50%,#6b213e 75%,#f708ab 100%); 
+background: linear-gradient(45deg, #381436 0%,#2f3348 25%,#ea3f95 50%,#6b213e 75%,#f708ab 100%);
+  top:0px;
+  position: fixed;
+  width: 100%;
+}
 }
 .accent-button {
   background-color: #22546f !important;
@@ -183,6 +198,14 @@ background: linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75
     margin-top:0.5rem;
   }
 }
+.FinderName{
+        display: -webkit-box;
+    -moz-line-clamp: 4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 #notification{
     background: blue;
     color: white;
@@ -198,8 +221,8 @@ background: linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75
 #FinderBox{
   position: absolute;
   background: blue;
-  MAX-WIDTH: 500px;
-    margin-top:50px;
+  MAX-WIDTH: 300px;
+    margin-top:20px;
 
 }
 .FinderRow{
@@ -217,13 +240,35 @@ background: linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75
 #FinderInput{
   border-radius: 20px;
 }
+a#router{
+  color: black;
+}
+a#router:hover{
+  color: black;
+  text-decoration: none;
+} 
 
   @media all and (max-width: 600px) {
   #FinderInput {
       border-radius: 20px;
-      width: 100px;
+
     }
+  #NavBarIcon{
+    -webkit-box-pack: center !important;
+    justify-content: center !important;
+    display: flex !important;
   }
+  }
+a#router2{
+  color: rgba(0, 0, 0, 0.5);
+}
+a#router2:hover{
+  color: rgba(0, 0, 0, 0.7);
+  text-decoration: none;
+} 
+.FinderRow:hover{
+  transform: scale(1.1)
+}
 
 input {
       padding: 4px 12px;

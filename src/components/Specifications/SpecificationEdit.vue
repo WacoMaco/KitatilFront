@@ -17,7 +17,8 @@
 </div>
 
 </div>
-<vue-slider class="slider" :marks="this.marks" v-if="this.specificationSelected != ''" :tooltip-formatter="formatter" @drag-end="saveSpecification" :enable-cross="false" :min='0' :max='5' :adsorb="true" :interval="0.1"  v-model="specificationSelected.score" > 
+<vue-slider class="slider" :marks="this.marks" v-if="this.specificationSelected != ''" :tooltip-formatter="formatter" 
+@drag-end="saveSpecification" :enable-cross="false" :min='0' :max='5' :adsorb="true" :interval="0.1"  v-model="specificationSelected.score" > 
   </vue-slider>
 
 

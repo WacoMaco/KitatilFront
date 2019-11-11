@@ -51,7 +51,7 @@
   "description_apply_feedback": "Enter at least 10 letters",
   "create_apply": "Create apply",
   "company_logo_alt": "Company logo",
-  "name": "Name",
+
   "logo": "Logo",
 
   "modal_edit_profile": "Edit profile",
@@ -205,7 +205,7 @@
   "terms": "terms and conditions",
   "upgrade_user_plan": "Upgrade your User Plan",
   "user_plan_nmonths_warning": "You cannot pay more than 24 month in advance or less than 1",
-  "price": "Price",
+
   "price_per_month": "5 EUR per month",
   "upgrade": "Upgrade",
   "manage_users": "Manage Users",
@@ -314,6 +314,7 @@
   "GPU_TECNOLOGY" : "Gpu tecnology",
   "KEYBOARD_NUMERIC" : "Numeric Keyboard",
   "SOFTWARE" : "Software included",
+  "CAMERA_RES" : "Camera Resolution",
   "Type" : "Type",
   "Name" : "Description",
   "Score": "Score",
@@ -323,7 +324,35 @@
   "send": "Send",
   "Average_Ratings": "Average rating from users",
   "MATERIAL": "Material",
-  "MAX_RAM": "Max ram"
+  "MAX_RAM": "Max ram",
+  "CARGA_API": "Load from the API",
+  "CARGA_BACKUP" : "Load backup",
+  "WAIT" : "This may take a few minutes",
+  "LAPTOPS_LOADED": "Laptops loaded",
+  "SEARCH": "Search by name",
+  "ORDENAR_KI": "Sort by Ki",
+  "ORDENAR_Price": "Sort by price",
+  "NEWS": "NEWS",
+  "shop": "Shop",
+  "Shipping_cost": "Shipping costs",
+  "createLaptop": "Create Laptop",
+  "rateSpec": "Rate specifications",
+  "name": "Name",
+  "image_url": "Image URL",
+  "GoogleId": "Google Id",
+  "price": "Price",
+  "AddOffer": "Add offer",
+  "AddSpec": "Add specification",
+  "Saveall": "Save All",
+  "Offer": "Offer",
+  "Spec" : "Specification",
+  "LaptopSaved" : "Laptop Saved",
+  "SpecSaved" : "Specification(s) saved",
+  "CommentSaved": "Comment sent",
+  "LaptopRated" : "Laptop has been rated",
+  "RAM_EMPTY_SLOTS" : "RAM empty slots",
+  "RAM_SLOTS" : "RAM slots"
+  
 
 
 }

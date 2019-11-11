@@ -1,16 +1,16 @@
 <template>
    
-     <Push>
+     <Push isOpen>
      <router-link :to="{name: 'AdminTools.api'}">
-        <span>Cargar desde la API</span>  
+        <span>{{this.$t('CARGA_API')}}</span>  
       </router-link> 
          
    <router-link :to="{name: 'AdminTools.create'}">   
-        <span>Cargar manualmente</span>  
+        <span>{{this.$t('createLaptop')}}</span>  
     </router-link>
       
     <router-link :to="{name: 'AdminTools.scores'}">   
-        <span>Puntuar Especificaciones</span>  
+        <span>{{this.$t('rateSpec')}}</span>  
       </router-link>
     </Push>
 

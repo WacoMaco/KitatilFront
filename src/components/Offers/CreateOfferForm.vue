@@ -56,12 +56,12 @@ export default {
        schema: {
         groups:[
         {
-            legend:'Offer',
+            legend: this.$t('Offer'),
             fields: [
                 {
                 type: 'input',
                 inputType: 'number',
-                label: 'Price',
+                label: this.$t('price'),
                 model: 'price',
                 required: true,
                 validator: VueFormGenerator.validators.number,
@@ -76,7 +76,7 @@ export default {
                 },{
                 type: 'input',
                 inputType: 'number',
-                label: 'Shipping cost',
+                label: this.$t('Shipping_cost'),
                 model: 'shippingCost',
                 required: true,
                 min: 0,
@@ -84,7 +84,7 @@ export default {
                 },{
                 type: 'input',
                 inputType: 'text',
-                label: 'Shop',
+                label: this.$t('shop'),
                 model: 'shop',
                 required: true,
                 validator: VueFormGenerator.validators.required,

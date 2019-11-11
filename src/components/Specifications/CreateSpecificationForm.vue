@@ -61,12 +61,12 @@ export default {
        schema: {
         groups:[
         {
-            legend:'Specification',
+            legend: this.$t('Spec'),
             fields: [
                 {
                 type: 'input',
                 inputType: 'text',
-                label: 'Name',
+                label: this.$t('Name'),
                 model: 'name',
                 required: true,
                 validator: VueFormGenerator.validators.string,
@@ -118,14 +118,14 @@ export default {
                       
       ];
                 },
-                label: 'Type',
+                label: this.$t('Type'),
                 model: 'type',
                 required: true,
                 validator: VueFormGenerator.validators.string,
                 },{
                 type: 'input',
                 inputType: 'number',
-                label: 'Score',
+                label: this.$t('Score'),
                 model: 'score',
                 required: true,
                 min: 0,

@@ -15,7 +15,7 @@
 <div id="ki" class ='col-2'>
           <div v-if="laptop.ki > 4" id="LaptopInfo" class="btn btn-primary"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div>
           <div v-if="laptop.ki < 4 && laptop.ki > 3" id="LaptopInfo" class="btn btn-warning"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div>
-          <div v-if="laptop.ki < 2.5" id="LaptopInfo" class="btn btn-danger"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div></div>
+          <div v-if="laptop.ki <= 3" id="LaptopInfo" class="btn btn-danger"><img class="logo" alt="Kimovil Logo" src="./../assets/logo.png"/> {{laptop.ki}} </div></div>
 <div id ='Score Graphic justify-content-center' class="col">
     <Chart :performanceScore = 'laptop.performanceScore' :batteryScore = 'laptop.batteryScore' :otherScore = 'laptop.otherScore' :displayScore = 'laptop.displayScore'/>
 </div>
@@ -30,7 +30,7 @@
 
 
 <div id='Average' class = 'col'>
-{{this.$t('Average_Ratings')}}: <strong class='AverageNumber'> {{ratingAverage}} </strong>
+{{this.$t('Average_Ratings')}}: <strong class='AverageNumber'> {{ratingAverage}} <strong v-if = "ratingAverage == null">--</strong> </strong>
 </div>
 
 </div>
@@ -57,9 +57,9 @@
 
 <div v-if= 'this.getCookie("token") && !isAdmin' class='row'>
 
-<textarea v-model='newComment' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+<textarea  :state= "newComment.length > 5"  v-model='newComment' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 
-<button class="btn btn-success" v-on:click="SendComment">{{this.$t('send')}}</button>
+<button :disabled = "newComment.length <= 5" class="btn btn-success" v-on:click="SendComment">{{this.$t('send')}}</button>
 
 </div>
 
@@ -137,7 +137,9 @@ export default {
       .post("http://localhost:8000/api/createComment",formData,{
           headers: { Authorization: token }
         }).then(result => { 
-            this.$router.go()
+            this.$bvModal.msgBoxOk(this.$t('CommentSaved'),  {
+            okTitle:'Ok'
+          }).then(value => { if(value){this.$router.go()}});
 
         });
 
@@ -153,7 +155,9 @@ export default {
       .post("http://localhost:8000/api/createRating",formData,{
           headers: { Authorization: token }
         }).then(result => { 
-            this.$router.go()
+            this.$bvModal.msgBoxOk(this.$t('LaptopRated'),  {
+            okTitle:'Ok'
+          }).then(value => { if(value){this.$router.go()}});
 
         });
 
