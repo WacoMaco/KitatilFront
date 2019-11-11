@@ -221,6 +221,25 @@ width: 25%;
   }
 }
 
+@media all and (max-width: 500px) {
+  h2.statement {
+    font-size: 1.4rem;
+  }
+  h1.title {
+    font-size: 2.5rem;
+  }
+  .main-title {
+  margin-top: 4em;
+  margin-left: 0.5em;
+  margin-right:0.5em;
+  color: #000;
+  z-index: 999;
+}
+  .laptop{
+    width: 100%;
+  }
+}
+
 .link-accent {
   color: #3030FF;
 }

@@ -218,7 +218,12 @@ background: linear-gradient(45deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 75
   border-radius: 20px;
 }
 
-
+  @media all and (max-width: 600px) {
+  #FinderInput {
+      border-radius: 20px;
+      width: 100px;
+    }
+  }
 
 input {
       padding: 4px 12px;
