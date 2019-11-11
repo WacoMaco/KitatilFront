@@ -75,7 +75,7 @@ export default {
   },
   mounted: function() {
       this.$http
-      .get("https://kitatil-api.herokuapp.com/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
+      .get("http://localhost:8000/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
        "&min_price=" + this.min_price + "&max_price=" + this.max_price).then(result => {
         this.laptops = result.data;
         this.laptopsCopy = result.data;
@@ -103,7 +103,7 @@ export default {
 
     loadMore(){
       this.$http
-      .get("https://kitatil-api.herokuapp.com/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
+      .get("http://localhost:8000/api/laptopsList?index="+ this.laptopsLoaded + "&filter=" + this.filter +
        "&min_price=" + this.min_price + "&max_price=" + this.max_price).then(result => {
         this.laptops = this.laptops.concat(result.data);
         this.laptopsCopy = this.laptopsCopy.concat(result.data);
@@ -145,7 +145,7 @@ export default {
     },
   Busca(finder){
    this.$http
-      .get("https://kitatil-api.herokuapp.com/api/finder" + '?finder=' + finder).then(result => {
+      .get("http://localhost:8000/api/finder" + '?finder=' + finder).then(result => {
         this.laptops = result.data  
         Vue.set(this.laptops,result.data)
     })
@@ -204,6 +204,9 @@ h2.statement {
 .laptop{
 width: 25%;
 }
+#page-wrap{
+    display:flex;
+}
 @media all and (max-width: 1000px) {
   h2.statement {
     font-size: 1.4rem;
@@ -223,6 +226,29 @@ width: 25%;
   }
 }
 
+@media all and (max-width: 500px) {
+  h2.statement {
+    font-size: 1.4rem;
+  }
+  h1.title {
+    font-size: 2.5rem;
+  }
+  .main-title {
+  margin-top: 4em;
+  margin-left: 0.5em;
+  margin-right:0.5em;
+  color: #000;
+  z-index: 999;
+}
+  .laptop{
+    width: 100%;
+  }
+  #page-wrap{
+    display:flex;
+    margin-left: 20px;
+}
+}
+
 .link-accent {
   color: #3030FF;
 }
@@ -232,9 +258,7 @@ width: 25%;
 display: flex;
 flex-flow: wrap;
 }
-#page-wrap{
-    display:flex;
-}
+
 
 
 .ShowMore {

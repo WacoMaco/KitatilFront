@@ -172,4 +172,17 @@ background: linear-gradient(180deg, #d8a3f7 0%,#4c66ea 25%,#ea3f95 50%,#6b213e 7
     .PrecioSlider{
       width:90% !important;
     }
+
+    @media all and (max-width: 900px) {
+  .bm-burger-button {
+      position: fixed;
+      width: 36px;
+      height: 30px;
+      left: 36px;
+      top: 100px;
+      cursor: pointer;
+      margin-top: 5%;
+      z-index: 1;
+    }
+    }
 </style>

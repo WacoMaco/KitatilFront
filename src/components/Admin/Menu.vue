@@ -97,4 +97,17 @@ export default {
       font-weight: 700;
       color: white;
     }
+
+  @media all and (max-width: 900px) {
+  .bm-burger-button {
+      position: fixed;
+      width: 36px;
+      height: 30px;
+      left: 36px;
+      top: 100px;
+      cursor: pointer;
+      margin-top: 5%;
+      z-index: 1;
+    }
+}
 </style>

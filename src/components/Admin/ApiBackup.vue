@@ -52,14 +52,14 @@ export default {
           this.loading2 = true;
           let token = `JWT ${this.$cookies.get("token")}`;
            this.$http
-            .get("https://kitatil-api.herokuapp.com/api/findLaptops", {
+            .get("http://localhost:8000/api/findLaptops", {
               headers: { Authorization: token }
             }).then(result => {
               this.loading = false;
               this.wait = result.data.message;
               if(this.wait == 'Finalizada carga'){
              this.$http
-            .get("https://kitatil-api.herokuapp.com/api/loadBackup", {
+            .get("http://localhost:8000/api/loadBackup", {
               headers: { Authorization: token }
             })
             .then(result => {
@@ -80,7 +80,7 @@ LoadBackup(){
           this.loading2 = true;
           let token = `JWT ${this.$cookies.get("token")}`;
              this.$http
-            .get("https://kitatil-api.herokuapp.com/api/loadBackup", {
+            .get("http://localhost:8000/api/loadBackup", {
               headers: { Authorization: token }
             })
             .then(result => {

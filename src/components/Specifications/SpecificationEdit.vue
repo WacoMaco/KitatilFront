@@ -60,7 +60,7 @@ export default {
     mounted: function() {
     var token = "JWT " + this.$cookies.get("token");
     this.$http
-      .get("https://kitatil-api.herokuapp.com/api/specificationType?type=" + this.selected, {
+      .get("http://localhost:8000/api/specificationType?type=" + this.selected, {
           headers: { Authorization: token }
         }).then(result => {
         this.specifications = result.data;
@@ -70,7 +70,7 @@ export default {
     selectedType: function () {
       var token = "JWT " + this.$cookies.get("token");
       this.$http
-      .get("https://kitatil-api.herokuapp.com/api/specificationType?type=" + this.selected,{
+      .get("http://localhost:8000/api/specificationType?type=" + this.selected,{
           headers: { Authorization: token }
         }).then(result => {
         this.specifications = result.data;
@@ -82,7 +82,7 @@ export default {
         formData.append("score", this.specificationSelected.score);
         formData.append("id", this.specificationSelected.id);
         this.$http
-      .post("https://kitatil-api.herokuapp.com/api/saveSpecification",formData,{
+      .post("http://localhost:8000/api/saveSpecification",formData,{
           headers: { Authorization: token }
         }).then(result => {
         this.saved = result.data.message;

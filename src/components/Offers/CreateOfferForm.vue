@@ -40,7 +40,7 @@ export default {
         formData.append("shop", this.model.shop);
         formData.append("url", this.model.url);
         this.$http
-      .post("https://kitatil-api.herokuapp.com/api/saveOffer",formData,{
+      .post("http://localhost:8000/api/saveOffer",formData,{
           headers: { Authorization: token }
         })
   }

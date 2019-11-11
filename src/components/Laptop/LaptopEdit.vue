@@ -146,7 +146,7 @@ export default {
 
  mounted: function() {
 
-      this.$http.get('https://kitatil-api.herokuapp.com/api/laptopView?laptopId='+ this.$route.params.laptopId).then((result) => {
+      this.$http.get('http://localhost:8000/api/laptopView?laptopId='+ this.$route.params.laptopId).then((result) => {
             this.laptop = result.data.Laptop
             this.specifications = result.data.Specifications
             this.offers = result.data.Offers
@@ -157,7 +157,7 @@ export default {
         })
 
 
-    this.$http.get('https://kitatil-api.herokuapp.com/api/laptopView?laptopId='+ this.$route.params.laptopId).then((result) => {
+    this.$http.get('http://localhost:8000/api/laptopView?laptopId='+ this.$route.params.laptopId).then((result) => {
             this.laptop = result.data.Laptop
             this.specifications = result.data.Specifications
             this.offers = result.data.Offers
@@ -199,7 +199,7 @@ export default {
         formData.append("specificationId", id);
         formData.append("name", this.specificationsToEdit[id]);
         this.$http
-      .post("https://kitatil-api.herokuapp.com/api/editSpecification",formData,{
+      .post("http://localhost:8000/api/editSpecification",formData,{
           headers: { Authorization: token }
         })
         }
@@ -235,7 +235,7 @@ export default {
         formData.append("displayScore", this.displayScore);
         formData.append("id", this.laptop.id);
         this.$http
-      .post("https://kitatil-api.herokuapp.com/api/saveScores",formData,{
+      .post("http://localhost:8000/api/saveScores",formData,{
           headers: { Authorization: token }
         }).then(result => {
           this.$bvModal.msgBoxOk(this.$t('SpecSaved'),  {
@@ -256,7 +256,7 @@ export default {
         formData.append("score", score);
         formData.append("id", id);
         this.$http
-      .post("https://kitatil-api.herokuapp.com/api/saveSpecification",formData,{
+      .post("http://localhost:8000/api/saveSpecification",formData,{
           headers: { Authorization: token }
         }).then(result => {
         this.saved = result.data.message;

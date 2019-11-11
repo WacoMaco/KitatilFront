@@ -46,7 +46,7 @@ export default {
         formData.append("score", this.model.score);
         formData.append("type", this.model.type);
         this.$http
-      .post("https://kitatil-api.herokuapp.com/api/saveNewSpecification",formData,{
+      .post("http://localhost:8000/api/saveNewSpecification",formData,{
           headers: { Authorization: token }
         })
   }
