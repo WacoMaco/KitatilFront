@@ -31,7 +31,7 @@
       <template slot="modal-header">{{$t('congrats')}}</template>
       {{this.registerMessage}}
       <br/>
-      <b-button variant="success" href="/login.html">{{$t('go_login')}}</b-button>
+      <b-button variant="success" href="/login">{{$t('go_login')}}</b-button>
       <!--<b-form @submit="login">
         <b-button
           type="submit"

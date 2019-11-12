@@ -20,7 +20,7 @@ export default new Router({
         {path: '/register', name:'Register', component: Register},
         { path: '/LaptopView/:laptopId',name:'LaptopView', component: LaptopView },
         { path: '/LaptopEdit/:laptopId',name:'LaptopEdit', component: LaptopEdit },
-        { path: '/login.html', name:'Login', component: Login },
+        { path: '/login', name:'Login', component: Login },
         { path: '/redirect', redirect:{name: 'Login'}},
         { path: '/', redirect:{name: 'Home'}},
         { path: '/admintools',  component:AdminTools,
