@@ -266,7 +266,7 @@ a#router:hover{
     margin-right: 0px;
   }
   .navbar{
-    display: inline-block !important;
+    display: block !important;
   }
   #FinderBox{
   position: absolute;

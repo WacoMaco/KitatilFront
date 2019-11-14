@@ -109,7 +109,7 @@ export default {
       width: 36px;
       height: 30px;
       left: 36px;
-      top: 36px;
+      top: 50px;
       cursor: pointer;
       margin-top: 5%;
       z-index: 1;

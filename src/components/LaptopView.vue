@@ -182,5 +182,8 @@ export default {
     margin:auto;
     font-size: 30px;
 }
+#LaptopImagTag{
+    max-width: 50%;
+}
 
 </style>
