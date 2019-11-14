@@ -35,7 +35,7 @@ export default {
 
 <style>
 .bm-burger-button {
-      position: fixed;
+      position: relative;
       width: 36px;
       height: 30px;
       left: 36px;
@@ -98,16 +98,4 @@ export default {
       color: white;
     }
 
-  @media all and (max-width: 900px) {
-  .bm-burger-button {
-      position: fixed;
-      width: 36px;
-      height: 30px;
-      left: 36px;
-      top: 100px;
-      cursor: pointer;
-      margin-top: 5%;
-      z-index: 1;
-    }
-}
 </style>

@@ -3,23 +3,12 @@
 
 
 <div id='content' class='row justify-content-center'>
-<button v-if="!loading && !loading2" type="button" @click='LoadApi' class="btn btn-success">{{this.$t('CARGA_API')}}</button>
-<button v-if="!loading && !loading2" type="button" @click='LoadBackup' class="btn btn-secondary">{{this.$t('CARGA_BACKUP')}}</button>
-<div v-if="loading || loading2" class="sk-rotating-plane"></div>
-</div>
-<div v-if="loading || loading2" class='row justify-content-center'> {{this.$t('WAIT')}} </div>
-<div v-if="!loading && !loading2 && laptops != null && !laptops.length == 0" class='row justify-content-center'> <h2> {{this.$t('LAPTOPS_LOADED')}} </h2> </div>
-
-       <div class="laptopBox container" >
-       <div class="laptop" v-bind:key="laptop.id" v-for="(laptop, index) in laptops">
-     <router-link :to="{name: 'LaptopView', params:{laptopId : laptop.id}}" active-class='none'> 
-        <Laptop  :laptop = laptop> </Laptop>
-     </router-link>
-       </div>
-
-
+<button v-if="!loadApiBol && !loadBackupBol" type="button" @click='LoadApi' class="btn btn-success">{{this.$t('CARGA_API')}}</button>
+<button v-if="!loadApiBol && !loadBackupBol" type="button" @click='LoadBackup' class="btn btn-secondary">{{this.$t('CARGA_BACKUP')}}</button>
 
 </div>
+<div v-if="loadApiBol" class='row justify-content-center'> {{this.$t('WAIT')}} </div>
+<div v-if="loadBackupBol" class='row justify-content-center'> {{this.$t('WAIT2')}} </div>
 </div>
 
 
@@ -39,6 +28,8 @@ export default {
       loading: false,
       loading2: false,
       wait: '',
+      loadApiBol: false,
+      loadBackupBol: false,
 
   }
   },
@@ -48,25 +39,13 @@ export default {
 
   },  methods: {
       LoadApi(){
-          this.loading = true;
-          this.loading2 = true;
           let token = `JWT ${this.$cookies.get("token")}`;
            this.$http
             .get("https://kitatil-api.herokuapp.com/api/findLaptops", {
               headers: { Authorization: token }
             }).then(result => {
-              this.loading = false;
               this.wait = result.data.message;
-              if(this.wait == 'Finalizada carga'){
-             this.$http
-            .get("https://kitatil-api.herokuapp.com/api/loadBackup", {
-              headers: { Authorization: token }
-            })
-            .then(result => {
-              this.laptops = result.data;
-              this.loading2 = false;
-            });
-          }
+              this.loadApiBol = true;
             });
 
             
@@ -76,18 +55,15 @@ export default {
 
 
 LoadBackup(){
-          this.loading = true;
-          this.loading2 = true;
           let token = `JWT ${this.$cookies.get("token")}`;
              this.$http
             .get("https://kitatil-api.herokuapp.com/api/loadBackup", {
               headers: { Authorization: token }
             })
             .then(result => {
-              this.loading = false;
-              this.loading2 = false;
               if(result.data != null){
               this.laptops = result.data;
+              this.loadBackupBol = true;
               }
               
             });
