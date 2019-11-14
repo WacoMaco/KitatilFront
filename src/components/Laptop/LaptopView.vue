@@ -45,9 +45,6 @@ export default {
   margin: 2em;
   max-height: 300px;
 }
-#LaptopImagTag{
-  max-width: 50%;
-}
 #Laptop:hover{
   transform: scale(1.2);
   text-decoration: none;

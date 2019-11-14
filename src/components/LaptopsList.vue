@@ -226,7 +226,7 @@ width: 25%;
   }
 }
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 650px) {
   h2.statement {
     font-size: 1.4rem;
   }

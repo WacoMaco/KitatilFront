@@ -6,8 +6,8 @@
       </b-navbar-brand>
       
         
-        <div class="col finder">
-        <input id="FinderInput" class="d-flex justify-content-end" type="text" v-model="finder" placeholder="HP,MSI,ACER..." v-on:focus='GainFocus' v-on:keyup='search'/>
+        <div class="col d-flex justify-content-center finder">
+        <input id="FinderInput" class="" type="text" v-model="finder" placeholder="HP,MSI,ACER..." v-on:focus='GainFocus' v-on:keyup='search'/>
         <div id ='FinderBox' v-if='finder != "" && focused'>
         <div id='LaptopsFinder'  v-bind:key="laptop.id" v-for="(laptop, index) in laptopsFinder">
        <router-link id = "router" v-on:click.native="LoseFocus" :to="{name: 'LaptopView', params:{laptopId : laptop.id}}"> 
@@ -15,8 +15,8 @@
            <div class="col FinderName">
            {{laptop.name}} 
            </div>
-            <div class="col">
-            <img id="LaptopImagTag" alt="No image" :src="laptop.image_url"/>
+            <div class="col" >
+            <img  id="LaptopImagTagNav" alt="No image" :src="laptop.image_url"/>
           </div>
            </div> 
 
@@ -198,6 +198,9 @@ background: linear-gradient(45deg, #381436 0%,#2f3348 25%,#ea3f95 50%,#6b213e 75
     margin-top:0.5rem;
   }
 }
+#LaptopImagTagNav{
+  max-width: 50%;
+}
 .FinderName{
         display: -webkit-box;
     -moz-line-clamp: 4;
@@ -222,10 +225,12 @@ background: linear-gradient(45deg, #381436 0%,#2f3348 25%,#ea3f95 50%,#6b213e 75
   position: absolute;
   background: blue;
   MAX-WIDTH: 300px;
-    margin-top:20px;
+    margin-top:35px;
+    z-index: 10;
 
 }
 .FinderRow{
+  font-size: 75%;
   background: white;
   border: 5px outset #1C6EA4;
   padding-top: 10px;
@@ -253,11 +258,33 @@ a#router:hover{
       border-radius: 20px;
 
     }
+  .NavBarIcon{
+    -webkit-box-pack: center !important;
+    justify-content: center !important;
+  }
+  #navbartag {
+    margin-right: 0px;
+  }
+  .navbar{
+    display: inline-block !important;
+  }
+  #FinderBox{
+  position: absolute;
+  background: blue;
+  width: 150px;
+    margin-top:35px;
+     z-index: 10;
+    
+
+}
   #NavBarIcon{
     -webkit-box-pack: center !important;
     justify-content: center !important;
     display: flex !important;
   }
+  #LaptopImagTagNav{
+  max-width: 100%;
+}
   }
 a#router2{
   color: rgba(0, 0, 0, 0.5);
