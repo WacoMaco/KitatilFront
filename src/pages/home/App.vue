@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="height: 100%;">
     <Navbar id="nav" style="z-index: 999;position:sticky"/>
-    <router-view style="min-height: 100%;margin: 100px auto -50px;position:relative;" :key="$route.fullPath" class="content"/>
+    <router-view :key="$route.fullPath" class="content"/>
   <Footer/>
   </div>
 </template>
@@ -26,19 +26,22 @@ export default {
 
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  height: 100%;
-}
 .content{
-  display: flex;
+ min-height: 100%;
+ margin: 100px auto -50px;
+ position:relative;
 }
 
+@media all and (max-width: 600px) {
+.content{
+ min-height: 100%;
+ margin: 150px auto -50px;
+ position:relative;
+}
 
+}
+
+</style>
 
 
 
