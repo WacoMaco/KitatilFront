@@ -48,7 +48,7 @@
         type="text"
         v-model="form.username"
         id="username"
-        :state="form.username.length > 5"
+        :state="form.username.length >= 5"
         :maxlength="80"
         aria-describedby="usernameHelpBlock"
         min="5"
